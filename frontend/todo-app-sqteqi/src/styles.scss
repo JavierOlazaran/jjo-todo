@@ -1,8 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
 body, html {
   margin: 0;
 }
 
 li {
   list-style: none;
+}
+
+
+:root {
+  /* Common colors*/
+  --bright-blue: hsl(220, 98%, 61%);
+
+  /* Light theme colors */
+  --white: hsl(0, 0%, 100%);
+  --very-light-gray: hsl(0, 0%, 98%);
+  --grayish-blue-100: hsl(236, 33%, 92%);
+  --grayish-blue-300: hsl(233, 11%, 84%);
+  --grayish-blue-500: hsl(236, 9%, 61%);
+  --grayish-blue-700: hsl(235, 19%, 35%);
+
+  /* Dark theme colors */
+  --light-grayish-blue: hsl(234, 39%, 85%);
+  --light-grayish-blue-hover: hsl(236, 33%, 92%);
+  --grayish-blue-600: hsl(234, 11%, 52%);
+  --grayish-blue-700: hsl(233, 14%, 35%);
+  --grayish-blue-800: hsl(237, 14%, 26%);
+  --very-dark-blue: hsl(235, 21%, 11%);
+  --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+
+  --accent-color: var(--bright-blue);
+  --main-background-color: var(--very-dark-blue);
+  --element-background-color: var(--very-dark-desaturated-blue);
+  --primary-foreground-color: var(--light-grayish-blue);
+  --secondary-foreground-color: var(--grayish-blue-700);
+  --tertiary-foreground-color: var(--white);
 }
