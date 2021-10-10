@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'todo-list', pathMatch: 'full'},
-  { path: 'todo-list', loadChildren: () => import('./pages/todo-list/todo-list.module').then(m => m.TodoListModule) },
+  { path: 'todo-list', loadChildren: () => import('./pages/todo-list-page/todo-list-page.module').then(m => m.TodoListModule) },
   { path: 'error', loadChildren: () => import('./pages/error/error.module').then(m => m.ErrorModule) },
   { path: 'not-found', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) },
   { path: '**', redirectTo: 'not-found'}
