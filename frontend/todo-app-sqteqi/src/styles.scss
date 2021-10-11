@@ -2,12 +2,19 @@ body, html {
   margin: 0;
 }
 
+body {
+  font-size: 18px;
+}
+
 li {
   list-style: none;
 }
 
-
 :root {
+  /**** Main font family types ****/
+  --main-font-400: 'Josefin-sans-400';
+  --main-font-700: 'Josefin-sans-700';
+
   /**** Common colors ****/
   --bright-blue: hsl(220, 98%, 61%);
 
@@ -47,4 +54,17 @@ li {
   --desktop-bg-img-path: var(--desktop-dark-background-img-path);
   --mobile-bg-img-path: var(--mobile-dark-background-img-path);
   --theme-toggle-button-icon: var(--sun-icon-path);
+}
+
+/**** Fonts ****/
+@font-face {
+  font-family: 'Josefin-sans-700';
+  src: url('./assets/fonts/static/JosefinSans-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Josefin-sans-400';
+  src: url('./assets/fonts/static/JosefinSans-Regular.ttf');
+  font-weight: 400;
 }

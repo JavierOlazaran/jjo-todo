@@ -1,0 +1,26 @@
+.todo_list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header__title {
+    font-family: var(--main-font-700);
+    color: var(--tertiary-foreground-color);
+    margin: 0;
+    font-size: 2em;
+    height: 1.5em;
+    line-height: 1.75em;
+  }
+
+  .theme__toggle__btn {
+    outline: none;
+    border: none;
+    background-image: var(--theme-toggle-button-icon);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: transparent;
+    height: 2em;
+    aspect-ratio: 1;
+  }
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ThemeService } from 'src/app/core/theme-handling/services/theme.service';
 
 @Component({
   selector: 'app-todos-list-header',
@@ -8,9 +9,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class TodosListHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private themeSvc: ThemeService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  toggleTheme() {
+    this.themeSvc.toggleTheme();
   }
 
 }

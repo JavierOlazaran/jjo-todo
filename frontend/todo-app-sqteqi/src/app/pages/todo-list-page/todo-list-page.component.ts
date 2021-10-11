@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from 'src/app/core/theme-handling/services/theme.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,14 +7,8 @@ import { ThemeService } from 'src/app/core/theme-handling/services/theme.service
 })
 export class TodoListComponent implements OnInit {
 
-  constructor(
-    private theme: ThemeService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  toggleTheme() {
-    this.theme.toggleTheme();
   }
 }
