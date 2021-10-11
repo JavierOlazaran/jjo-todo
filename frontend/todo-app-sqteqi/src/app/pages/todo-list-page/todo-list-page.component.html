@@ -1,8 +1,9 @@
 <div class="todo_list__page__container">
+  <div class="background__image"></div>
   <div class="todo_list__container">
     <header class="todo_list__header">
       <h1 class="header__title">TODO</h1>
-      <button class="theme__toggle">theme</button>
+      <button class="theme__toggle" (click)="toggleTheme()">theme</button>
     </header>
     <div class="new__todo__component">sdfsdf</div>
 
@@ -21,9 +22,10 @@
       </div>
       <button class="clear_completed__btn">Clear Completed</button>
     </footer>
+
+    <p class="drag_and_drop__msg">Drag and drop to reorder list</p>
   </div>
 
-  <p class="drag_and_drop__msg">Drag and drop to reorder list</p>
 </div>
 
 

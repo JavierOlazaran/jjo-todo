@@ -9,6 +9,9 @@ export const darkTheme: Theme = {
     "--primary-foreground-color": "var(--light-grayish-blue)",
     "--secondary-foreground-color": "var(--grayish-blue-700)",
     "--tertiary-foreground-color": "var(--white)",
+    "--desktop-bg-img-path": "var(--desktop-dark-background-img-path)",
+    "--mobile-bg-img-path": "var(--mobile-dark-background-img-path)",
+    "--theme-toggle-button-icon": "var(--sun-icon-path)"
   }
 }
 
@@ -21,5 +24,8 @@ export const lightTheme: Theme = {
     "--primary-foreground-color": "var(--grayish-blue-700)",
     "--secondary-foreground-color": "var(--grayish-blue-500)",
     "--tertiary-foreground-color": "var(--white)",
+    "--desktop-bg-img-path": "var(--desktop-light-background-img-path)",
+    "--mobile-bg-img-path": "var(--mobile-light-background-img-path)",
+    "--theme-toggle-button-icon": "var(--moon-icon-path)"
   }
 }

@@ -31,5 +31,22 @@ describe('ThemeService', () => {
       expect(service["activeTheme"].props).toEqual(darkTheme.props);
     });
 
+    test('should set root properties according to theme', () => {
+      service["activeTheme"] = darkTheme;
+      service.toggleTheme();
+
+      for (let property in lightTheme.props) {
+        expect(document.documentElement.style.getPropertyValue(property))
+        .toEqual(lightTheme.props[property]);
+      }
+
+      service["activeTheme"] = lightTheme;
+      service.toggleTheme();
+
+      for (let property in darkTheme.props) {
+        expect(document.documentElement.style.getPropertyValue(property))
+        .toEqual(darkTheme.props[property]);
+      }
+    })
   });
 });

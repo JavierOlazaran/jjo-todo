@@ -8,10 +8,10 @@ li {
 
 
 :root {
-  /* Common colors*/
+  /**** Common colors ****/
   --bright-blue: hsl(220, 98%, 61%);
 
-  /* Light theme colors */
+  /**** Light theme colors ****/
   --white: hsl(0, 0%, 100%);
   --very-light-gray: hsl(0, 0%, 98%);
   --grayish-blue-100: hsl(236, 33%, 92%);
@@ -19,7 +19,7 @@ li {
   --grayish-blue-500: hsl(236, 9%, 61%);
   --grayish-blue-700: hsl(235, 19%, 35%);
 
-  /* Dark theme colors */
+  /**** Dark theme colors ****/
   --light-grayish-blue: hsl(234, 39%, 85%);
   --light-grayish-blue-hover: hsl(236, 33%, 92%);
   --grayish-blue-600: hsl(234, 11%, 52%);
@@ -28,10 +28,23 @@ li {
   --very-dark-blue: hsl(235, 21%, 11%);
   --very-dark-desaturated-blue: hsl(235, 24%, 19%);
 
+  /**** Images paths ****/
+  --desktop-dark-background-img-path: url("./assets/images/bg-desktop-dark.jpg");
+  --desktop-light-background-img-path: url("./assets/images/bg-desktop-light.jpg");
+  --mobile-dark-background-img-path: url("./assets/images/bg-mobile-dark.jpg");
+  --mobile-light-background-img-path: url("./assets/images/bg-mobile-light.jpg");
+  --moon-icon-path: url("./assets/images/icon-moon.svg");
+  --sun-icon-path: url("./assets/images/icon-sun.svg");
+
+  /* Theme properties */
+  /**** colors ****/
   --accent-color: var(--bright-blue);
   --main-background-color: var(--very-dark-blue);
   --element-background-color: var(--very-dark-desaturated-blue);
   --primary-foreground-color: var(--light-grayish-blue);
   --secondary-foreground-color: var(--grayish-blue-700);
   --tertiary-foreground-color: var(--white);
+  --desktop-bg-img-path: var(--desktop-dark-background-img-path);
+  --mobile-bg-img-path: var(--mobile-dark-background-img-path);
+  --theme-toggle-button-icon: var(--sun-icon-path);
 }

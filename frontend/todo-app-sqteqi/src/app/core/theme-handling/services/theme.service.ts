@@ -23,9 +23,7 @@ export class ThemeService {
     this.activeTheme = theme;
 
     for(let property in this.activeTheme.props) {
-      if (Object.prototype.hasOwnProperty(property)) {
-        document.documentElement.style.setProperty(property, this.activeTheme.props[property]);
-      }
+      document.documentElement.style.setProperty(property, this.activeTheme.props[property]);
     }
   }
 }
