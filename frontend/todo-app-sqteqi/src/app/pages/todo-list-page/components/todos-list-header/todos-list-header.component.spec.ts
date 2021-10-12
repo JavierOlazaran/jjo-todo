@@ -5,6 +5,9 @@ import { TodosListHeaderComponent } from './todos-list-header.component';
 describe('TodosListHeaderComponent', () => {
   let component: TodosListHeaderComponent;
   let fixture: ComponentFixture<TodosListHeaderComponent>;
+  let themeServiceMock = {
+    toggleTheme: jest.fn()
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,5 +24,17 @@ describe('TodosListHeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('Toggle theme button', () => {
+
+    test('should trigger toggleTheme method', () => {
+      const toggleFNSpy = jest.spyOn(component, "toggleTheme");
+      const toggleButton = fixture.debugElement.nativeElement.querySelector('.theme__toggle__btn');
+      toggleButton.click();
+
+      expect(toggleFNSpy).toHaveBeenCalled();
+    })
+
   });
 });
