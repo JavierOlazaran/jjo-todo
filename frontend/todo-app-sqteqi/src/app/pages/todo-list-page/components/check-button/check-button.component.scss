@@ -1,0 +1,29 @@
+.check__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border-radius: 50%;
+  height: 1.75em;
+  width: 1.75em;
+  margin: 0 14px;
+  padding: 0;
+
+  .check_mark__icon {
+    background-position: center;
+    background-size: contain;
+    height: .75em;
+    width: .75em;
+  }
+}
+
+.unchecked {
+  background-color: transparent;
+  border-style: solid;
+  border-color: var(--secondary-foreground-color);
+}
+
+.checked {
+  background: linear-gradient(135deg, hsl(192,100%,33%) 0%,hsl(280,77%,36%) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  border: none;
+}

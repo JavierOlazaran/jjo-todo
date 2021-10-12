@@ -8,6 +8,7 @@ import { NewTodoComponent } from './components/new-todo/new-todo.component';
 import { TodosListFooterComponent } from './components/todos-list-footer/todos-list-footer.component';
 import { TodosListComponent } from './components/todos-list/todos-list.component';
 import { TodosListFiltersComponent } from './components/todos-list-filters/todos-list-filters.component';
+import { CheckButtonComponent } from './components/check-button/check-button.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { TodosListFiltersComponent } from './components/todos-list-filters/todos
     NewTodoComponent,
     TodosListFooterComponent,
     TodosListComponent,
-    TodosListFiltersComponent
+    TodosListFiltersComponent,
+    CheckButtonComponent
   ],
   imports: [
     CommonModule,

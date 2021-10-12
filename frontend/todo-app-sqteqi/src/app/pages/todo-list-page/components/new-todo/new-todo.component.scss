@@ -1,0 +1,23 @@
+.new__todo__component__container {
+  background-color: var(--element-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 50px;
+  padding: 12px 8px;
+  margin: 1em 0;
+
+  .new__todo__input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    height: 100%;
+    flex-grow: 1;
+    font-family: var(--main-font-400);
+    color: var(--secondary-foreground-color);
+    font-size: .85em;
+  }
+}

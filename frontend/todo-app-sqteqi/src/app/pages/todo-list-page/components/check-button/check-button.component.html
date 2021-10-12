@@ -1,0 +1,7 @@
+<button
+  (click)="onButtonClicked()"
+  class="check__btn"
+  [ngClass]="{'checked' : checked,  'unchecked' : !checked}"
+>
+  <img src="../../../../../assets/images/icon-check.svg" class="check_mark__icon" *ngIf="checked">
+</button>
