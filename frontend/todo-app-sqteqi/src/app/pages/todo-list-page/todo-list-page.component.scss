@@ -10,21 +10,26 @@ h1 {margin: 0}
     background-image: var(--desktop-bg-img-path);
     background-repeat: no-repeat;
     background-size: cover;
-    
   }
 
-
-  .todo_list__container {
-
-    //background-color: red;
-
+  .todo_form__container {
     position: absolute;
     top: 10%;
     left: 50%;
     transform: translateX(-50%);
 
     width: 480px;
-    height: 85vh;
+    height: min-content;
+
+    .list__container{
+      border-radius: var(--block-border-radius);
+      overflow-x: clip;
+
+      .todos__list {
+        padding: 0;
+        margin: 0;
+      }
+    }
   }
 }
 

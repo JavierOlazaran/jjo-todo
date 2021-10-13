@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
 
-  border-radius: 8px;
+  border-radius: var(--block-border-radius);
   box-sizing: border-box;
   height: 50px;
   padding: 12px 8px;

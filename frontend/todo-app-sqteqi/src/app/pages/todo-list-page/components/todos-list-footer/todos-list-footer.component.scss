@@ -1,0 +1,40 @@
+.todo_list__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  padding: 8px 12px 8px 26px;
+  background-color: var(--element-background-color);
+
+  .items__left__text {
+    margin: 0;
+    color: var(--secondary-foreground-color);
+    font-size: .85em;
+  }
+
+  .todos__filters__container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    height: 30px;
+  }
+
+  .todos__filter__btn {
+    outline: none;
+    border: none;
+    background: transparent;
+
+    color: var(--secondary-foreground-color);
+
+    &:hover {
+      color: var(--primary-foreground-color);
+    }
+
+    .--active {
+      color: var(--accent-color)
+    }
+  }
+}

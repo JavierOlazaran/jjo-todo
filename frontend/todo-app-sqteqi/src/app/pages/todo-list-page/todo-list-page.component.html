@@ -1,25 +1,17 @@
 <div class="todo_list__page__container">
   <div class="background__image"></div>
-  <div class="todo_list__container">
+  <div class="todo_form__container">
     <app-todos-list-header></app-todos-list-header>
     <app-new-todo></app-new-todo>
 
-    <ul class="todos__list">
-      <app-todo-item></app-todo-item>
-      <app-todo-item></app-todo-item>
-      <app-todo-item></app-todo-item>
-      <app-todo-item></app-todo-item>
-    </ul>
+    <div class="list__container">
+      <ul class="todos__list">
+        <app-todo-item *ngFor="let todo of todos" [todoItem]="todo"></app-todo-item>
+      </ul>
 
-    <footer class="todo_list__footer">
-      <p class="items__left">asdasd</p>
-      <div class="todos__filters__container">
-        <button class="todos__filter__btn">All</button>
-        <button class="todos__filter__btn">Active</button>
-        <button class="todos__filter__btn">Completed</button>
-      </div>
-      <button class="clear_completed__btn">Clear Completed</button>
-    </footer>
+      <app-todos-list-footer></app-todos-list-footer>
+      
+    </div>
 
     <p class="drag_and_drop__msg">Drag and drop to reorder list</p>
   </div>
