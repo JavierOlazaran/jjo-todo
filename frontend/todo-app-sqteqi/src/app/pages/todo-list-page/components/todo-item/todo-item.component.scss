@@ -31,4 +31,14 @@
     bottom: 0;
     left: 0;
   }
+
+  .delete__item__btn {
+    display: none;
+  }
+
+  &:hover {
+    .delete__item__btn {
+      display: block;
+    }
+  }
 }

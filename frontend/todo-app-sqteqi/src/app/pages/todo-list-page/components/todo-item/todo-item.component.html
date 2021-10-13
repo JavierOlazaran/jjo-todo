@@ -6,5 +6,5 @@
       'todo--active': todoItem.status === 'active'
     }"
   >{{todoItem.description}}</p>
-  <app-delete-button (onClick)="onDeleteButtonClick()"></app-delete-button>
+  <app-delete-button class="delete__item__btn" (onClick)="onDeleteButtonClick()"></app-delete-button>
 </div>
