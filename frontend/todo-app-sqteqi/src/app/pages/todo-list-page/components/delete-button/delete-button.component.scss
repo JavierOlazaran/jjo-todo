@@ -1,0 +1,10 @@
+.todo__delete__button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+
+  .cross__icon {
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}

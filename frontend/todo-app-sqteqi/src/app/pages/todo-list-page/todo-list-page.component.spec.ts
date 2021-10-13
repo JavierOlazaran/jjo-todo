@@ -1,11 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NewTodoComponent } from './components/new-todo/new-todo.component';
-import { TodosListFiltersComponent } from './components/todos-list-filters/todos-list-filters.component';
-import { TodosListFooterComponent } from './components/todos-list-footer/todos-list-footer.component';
-import { TodosListHeaderComponent } from './components/todos-list-header/todos-list-header.component';
-import { TodosListComponent } from './components/todos-list/todos-list.component';
 
 import { TodoListComponent } from './todo-list-page.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -14,13 +10,9 @@ describe('TodoListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        TodoListComponent,
-        TodosListHeaderComponent,
-        NewTodoComponent,
-        TodosListFooterComponent,
-        TodosListComponent,
-        TodosListFiltersComponent
-      ]
+        TodoListComponent
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });

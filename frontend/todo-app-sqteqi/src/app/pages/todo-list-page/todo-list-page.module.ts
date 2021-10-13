@@ -9,6 +9,8 @@ import { TodosListFooterComponent } from './components/todos-list-footer/todos-l
 import { TodosListComponent } from './components/todos-list/todos-list.component';
 import { TodosListFiltersComponent } from './components/todos-list-filters/todos-list-filters.component';
 import { CheckButtonComponent } from './components/check-button/check-button.component';
+import { TodoItemComponent } from './components/todo-item/todo-item.component';
+import { DeleteButtonComponent } from './components/delete-button/delete-button.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { CheckButtonComponent } from './components/check-button/check-button.com
     TodosListFooterComponent,
     TodosListComponent,
     TodosListFiltersComponent,
-    CheckButtonComponent
+    CheckButtonComponent,
+    TodoItemComponent,
+    DeleteButtonComponent
   ],
   imports: [
     CommonModule,

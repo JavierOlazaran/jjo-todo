@@ -10,6 +10,10 @@ li {
   list-style: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 :root {
   /**** Main font family types ****/
   --main-font-400: 'Josefin-sans-400';
