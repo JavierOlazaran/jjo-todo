@@ -1,9 +1,11 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import { JwtAuthGuard } from './../auth/guards/jwt-auth.guard';
+import { Controller, Delete, Get, Patch, Post, Put, Request, UseGuards } from '@nestjs/common';
 
 @Controller('todos')
 export class TodosController {
+  @UseGuards(JwtAuthGuard)
   @Get()
-  getAllTodos() {
+  getAllTodos(@Request()  req) {
     return 'all todos';
   }
 

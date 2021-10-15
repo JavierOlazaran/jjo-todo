@@ -1,4 +1,3 @@
-import { UserCredentials } from './../user/model/user.model';
 import { AuthService } from 'src/auth/auth.service';
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
