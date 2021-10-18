@@ -15,6 +15,8 @@ export class UserService {
             ...newUser,
             todos: [],
         });
+
+        return db.find(user => user.userName === newUser.userName);
     }
 
     findUser(userName: string) {

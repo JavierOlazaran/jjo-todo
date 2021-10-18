@@ -6,7 +6,7 @@ export interface MockedDBSchema {
     todos: TodoItemObject[],
 }
 
-export const db = [
+export const db: MockedDBSchema[] = [
   {
     userName: 'user1',
     password: '12345',
