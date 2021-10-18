@@ -1,36 +1,45 @@
+import { CreateTodoRequestDTO } from './models/todos.dto';
+import { TodosService } from './todos.service';
 import { JwtAuthGuard } from './../auth/guards/jwt-auth.guard';
-import { Controller, Delete, Get, Patch, Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, Put, UseGuards } from '@nestjs/common';
 
 @Controller('todos')
 export class TodosController {
+  constructor(private todosSvc: TodosService) {}
+
   @UseGuards(JwtAuthGuard)
   @Get()
-  getAllTodos(@Request()  req) {
-    return 'all todos';
+  async getAllTodos(@Headers('authorization') authorization: string){
+    return await this.todosSvc.getAllTodos(authorization);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':todoId')
-  getTodoById() {
-    return 'todo';
+  async getTodoById(@Headers('authorization') authorization: string, @Param('todoId') todoId: string) {
+    return await this.todosSvc.getTodoById(todoId, authorization);
   }
 
-  @Post()
-  createTodo() {
-    return 'new todo';
+  @UseGuards(JwtAuthGuard)
+  @Post('create')
+  async createTodo(@Headers('authorization') authorization: string, @Body() body: CreateTodoRequestDTO) {
+    return await this.todosSvc.createTodo(authorization, body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':todoId')
-  updateTodo() {
-    return 'updated todo';
+  async updateTodo(@Headers('authorization') authorization: string, @Param('todoId') todoId: string, @Body() body: any) {
+    return await this.todosSvc.replaceTodo(authorization, todoId, body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':todoId')
-  editTodo() {
-    return 'edited todo';
+  async patchTodo(@Headers('authorization') authorization: string, @Param('todoId') todoId: string, @Body() body: any) {
+    return await this.todosSvc.runPatchAction(authorization, todoId, body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':todoId')
-  deleteTodo() {
-    return 'todo deleted';
+  async deleteTodo(@Headers('authorization') authorization: string, @Param('todoId') todoId: string) {
+    return await this.todosSvc.deleteTodo(authorization, todoId);
   }
 }

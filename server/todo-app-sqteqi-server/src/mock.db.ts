@@ -10,7 +10,13 @@ export const db = [
   {
     userName: 'user1',
     password: '12345',
-    todos: [],
+    todos: [
+      {
+        id: 'todo1',
+        description: 'some todo',
+        status: 'active'
+      }
+    ],
   },
   {
     userName: 'user1',

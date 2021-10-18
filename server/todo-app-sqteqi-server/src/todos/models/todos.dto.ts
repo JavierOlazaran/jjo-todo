@@ -5,7 +5,6 @@ export class TodoItemObject {
 }
 
 export class CreateTodoRequestDTO {
-    id: string;
     description: string;
     status: string;
 }

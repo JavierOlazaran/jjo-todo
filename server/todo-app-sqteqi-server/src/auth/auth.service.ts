@@ -7,7 +7,7 @@ export class AuthService {
 
     constructor(
         private jwt: JwtService,
-        private userSvc: UserService    
+        private userSvc: UserService
     ) {}
 
     async validateCredentials(userName: string, password: string): Promise<any> {
@@ -18,5 +18,17 @@ export class AuthService {
 
     async login(user: string) {
         return {access_token: this.jwt.sign({user: user})};
+    }
+
+    async retrieveJwtPayload(jwtToken: string) {
+        return this.jwt.decode(jwtToken);
+    }
+
+    async getUserNameFromToken(jwtToken: string) {
+        const token = jwtToken.replace('bearer ', '');
+        const payload = await this.retrieveJwtPayload(token);
+        const userName = payload["user"];
+
+        return userName;
     }
 }
