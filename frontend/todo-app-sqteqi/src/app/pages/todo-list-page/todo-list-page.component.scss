@@ -1,16 +1,11 @@
-h1 {margin: 0}
+h1 {
+  margin: 0;
+}
+
 .todo_list__page__container {
   height: 100vh;
   position: relative;
   background-color: var(--main-background-color);
-
-  .background__image {
-    width: 100%;
-    height: 30vh;
-    background-image: var(--desktop-bg-img-path);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
 
   .todo_form__container {
     position: absolute;

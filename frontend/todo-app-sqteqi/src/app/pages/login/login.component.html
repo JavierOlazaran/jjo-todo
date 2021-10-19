@@ -1,0 +1,64 @@
+<div class="login__page__container">
+  <app-main-background-img></app-main-background-img>
+  <div class="login__form__container">
+    <app-todos-list-header></app-todos-list-header>
+    <form [formGroup]="loginForm" action="submit" class="login__form" (ngSubmit)="submit()"  >
+
+      <div class="input__container">
+        <input id="username" formControlName="username"
+          class="login__input"
+          [ngClass]="{
+            'invalid__input': username?.errors?.required && (username?.dirty || !username?.untouched)
+          }"
+          type="text"
+          placeholder="User name">
+        <p class="error__msg" *ngIf="username?.errors?.required && (username?.dirty || !username?.untouched)"
+
+        >Required field</p>
+      </div>
+
+      <div class="input__container">
+        <input id="password" formControlName="password"
+          [ngClass]="{'invalid__input':
+            (password?.errors?.required || loginForm?.errors?.fieldsDoesNotMatch) &&
+            (password?.dirty || !password?.untouched)
+          }"
+          class="login__input"
+          type="password"
+          placeholder="Password">
+          <p class="error__msg" *ngIf="password?.errors?.required && (password?.dirty || !password?.untouched)"
+          >Required field</p>
+      </div>
+
+      <div class="input__container" *ngIf="register" >
+        <input id="confirmPassword" formControlName="confirmPassword"
+          [ngClass]="{
+            'invalid__input':
+            (confirmPassword?.errors?.required || loginForm?.errors?.fieldsDoesNotMatch) &&
+            (confirmPassword?.dirty || !confirmPassword?.untouched)
+          }"
+          class="login__input"
+          type="password"
+          placeholder="Repeat Password" >
+          <p class="error__msg" *ngIf="confirmPassword?.errors?.required && (confirmPassword?.dirty || !confirmPassword?.untouched)"
+          >Required field</p>
+      </div>
+
+      <p class="wrong__credentials__msg" *ngIf="inputError.display" >{{inputError.msg}}</p>
+
+      <div class="action__buttons__container">
+        <button
+          [disabled]="!loginForm.valid"
+          class="primary button"
+          type="submit">{{submitButtonText}}</button>
+
+        <p class="btns__separator">or</p>
+
+        <button
+          (click)="setRegister()"
+          class="secondary button"
+          type="button">{{secondaryButtonText}}</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -5,6 +5,13 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // Proper CORS configuration should be set for prod environments
+  app.enableCors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+  });
   app.useGlobalPipes(new ValidationPipe());
 
   const options = new DocumentBuilder()

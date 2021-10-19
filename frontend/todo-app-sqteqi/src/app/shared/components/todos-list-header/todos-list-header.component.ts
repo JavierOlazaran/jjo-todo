@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ThemeService } from '../../../../core/theme-handling/services/theme.service';
+import { ThemeService } from '../../../core/theme-handling/services/theme.service';
 
 @Component({
   selector: 'app-todos-list-header',
