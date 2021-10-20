@@ -2,8 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 
 export type footerButtonEvent = 'FILTER_ALL'
                               | 'FILTER_ACTIVE'
-                              | 'FILTER_COMPLETED'
-                              | 'CLEAR_COMPLETED';
+                              | 'FILTER_COMPLETED';
 @Component({
   selector: 'app-todos-list-footer',
   templateUrl: './todos-list-footer.component.html',
@@ -21,7 +20,8 @@ export class TodosListFooterComponent implements OnInit {
   }
   private _totalItems = 0;
 
-  @Output() buttonEvent = new EventEmitter<footerButtonEvent>();
+  @Output() filterButtonEvent = new EventEmitter<footerButtonEvent>();
+  @Output() clearCompleted = new EventEmitter();
 
   constructor() { }
 
@@ -29,6 +29,10 @@ export class TodosListFooterComponent implements OnInit {
   }
 
   onButtonEvent(event: footerButtonEvent) {
-    this.buttonEvent.emit(event);
+    this.filterButtonEvent.emit(event);
+  }
+
+  onClearCompleteClick() {
+    this.clearCompleted.emit();
   }
 }

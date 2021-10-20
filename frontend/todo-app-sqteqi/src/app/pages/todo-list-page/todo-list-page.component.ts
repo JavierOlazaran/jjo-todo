@@ -37,12 +37,12 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  onFooterButtonClick(event: footerButtonEvent) {
-    if(event === 'CLEAR_COMPLETED') {
-      this.deleteCompletedTodos();
-    } else {
+  onFooterButtonClick(event: any) {
       this.todos = this.footerActionEventsMap.get(event)(this.userTodos);
-    }
+  }
+
+  clearCompleted() {
+    this.deleteCompletedTodos();
   }
 
   getUserTodos() {
