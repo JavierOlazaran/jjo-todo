@@ -26,9 +26,9 @@ export class MainInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const authToken = `bearer ${this.session.getToken()}`;
+    const authToken = `Bearer ${this.session.getToken()}`;
     if (!request.url.startsWith(this.authUrl)) {
-      this.headers = this.headers.append('Authorization', authToken);
+      this.headers = this.headers.set('Authorization', authToken);
     }
     return next.handle(request.clone({headers: this.headers}));
   }

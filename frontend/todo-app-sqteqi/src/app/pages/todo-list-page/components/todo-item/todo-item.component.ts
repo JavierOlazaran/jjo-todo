@@ -19,11 +19,11 @@ export class TodoItemComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {console.log(this.todoItem);
+  }
 
   onCheckButtonClick(status: boolean) {
     this.todoItem = {...this.todoItem, status: status ? 'completed' : 'active'};
-
     this.itemStatusChanged.emit(this.todoItem)
   }
 

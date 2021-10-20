@@ -1,5 +1,5 @@
 <div class="todo__item__container">
-  <app-check-button (checkClicked)="onCheckButtonClick($event)"></app-check-button>
+  <app-check-button [checked]="todoItem.status === 'completed'" (checkClicked)="onCheckButtonClick($event)"></app-check-button>
   <p class="todo__description"
     [ngClass]="{
       'todo--completed': todoItem.status === 'completed',

@@ -12,7 +12,15 @@ export type footerButtonEvent = 'FILTER_ALL'
 })
 export class TodosListFooterComponent implements OnInit {
 
-  @Input() totalItems: number = 0;
+  @Input()
+  set totalItems(value: number) {
+    this._totalItems = value;
+  };
+  get totalItems(): number {
+    return this._totalItems;
+  }
+  private _totalItems = 0;
+
   @Output() buttonEvent = new EventEmitter<footerButtonEvent>();
 
   constructor() { }

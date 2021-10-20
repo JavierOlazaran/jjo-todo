@@ -20,7 +20,7 @@ export class TodosController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('create')
+  @Post()
   async createTodo(@Headers('authorization') authorization: string, @Body() body: CreateTodoRequestDTO) {
     return await this.todosSvc.createTodo(authorization, body);
   }
@@ -41,5 +41,11 @@ export class TodosController {
   @Delete(':todoId')
   async deleteTodo(@Headers('authorization') authorization: string, @Param('todoId') todoId: string) {
     return await this.todosSvc.deleteTodo(authorization, todoId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('/delete/completed')
+  async deleteCompletedTodos(@Headers('authorization') authorization: string) {
+    return await this.todosSvc.deleteCompleted(authorization);
   }
 }

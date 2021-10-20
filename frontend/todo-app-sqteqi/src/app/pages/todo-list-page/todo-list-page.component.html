@@ -2,7 +2,7 @@
   <app-main-background-img></app-main-background-img>
   <div class="todo_form__container">
     <app-todos-list-header></app-todos-list-header>
-    <app-new-todo></app-new-todo>
+    <app-new-todo (sendNewTodo)="createTodo($event)"></app-new-todo>
 
     <div class="list__container">
       <div class="todos__list" *ngIf="todos.length === 0" >
@@ -15,6 +15,7 @@
         ></app-todo-item>
       </ul>
       <app-todos-list-footer
+        [totalItems]="activeTodosLeft"
         (buttonEvent)="onFooterButtonClick($event)"
       ></app-todos-list-footer>
     </div>

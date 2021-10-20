@@ -17,7 +17,6 @@ export class LoggedGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(this.session.isLogged());
 
       if (!this.session.isLogged()) {
         this.router.navigate([appRoutes.LOGIN]);

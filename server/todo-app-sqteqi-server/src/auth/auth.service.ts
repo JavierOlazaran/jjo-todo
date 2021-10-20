@@ -30,7 +30,7 @@ export class AuthService {
     }
 
     async getUserNameFromToken(jwtToken: string) {
-        const token = jwtToken.replace('bearer ', '');
+        const token = jwtToken.replace('Bearer ', '');
         const payload = await this.retrieveJwtPayload(token);
         const userName = payload["user"];
 
