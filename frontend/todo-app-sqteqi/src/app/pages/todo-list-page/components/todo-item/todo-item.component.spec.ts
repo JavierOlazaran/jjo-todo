@@ -8,12 +8,12 @@ describe('TodoItemComponent', () => {
   let component: TodoItemComponent;
   let fixture: ComponentFixture<TodoItemComponent>;
   let itemActiveMock: TodoItem = {
-    itemId: 'someId',
+    id: 'someId',
     status: 'active',
     description: 'lorem ipsum'
   };
   let itemCompletedMock: TodoItem = {
-    itemId: 'someId',
+    id: 'someId',
     status: 'completed',
     description: 'lorem ipsum'
   };
@@ -54,7 +54,6 @@ describe('TodoItemComponent', () => {
       component.todoItem = itemCompletedMock;
       const descriptionElement = fixture.debugElement.query(By.css('.todo__description'));
       fixture.detectChanges();
-      console.log(descriptionElement.classes)
 
       expect(descriptionElement.classes['todo--active']).toBe(false);
       expect(descriptionElement.classes['todo--completed']).toBe(true);
@@ -118,7 +117,7 @@ describe('TodoItemComponent', () => {
 
       component.onDeleteButtonClick();
 
-      expect(onDeleteSpy).toHaveBeenCalledWith(itemActiveMock.itemId);
+      expect(onDeleteSpy).toHaveBeenCalledWith(itemActiveMock.id);
     })
 
   })

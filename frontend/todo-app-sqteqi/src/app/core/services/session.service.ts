@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import dayjs from 'dayjs';
 
 export interface Session {
   token: string;
-  sessionExpiration: number;
+  exp: number;
+  iat: number;
   username: string;
 }
 
@@ -14,25 +15,53 @@ export class SessionService {
 
   private readonly sessionInitialState: Session = {
     token: '',
-    sessionExpiration: NaN,
+    exp: NaN,
+    iat: NaN,
     username: ''
   };
 
-  sessionSubject: BehaviorSubject<Session> = new BehaviorSubject(this.sessionInitialState);
+  session: Session = this.sessionInitialState;
 
-  constructor() { }
+  constructor() {}
 
   setSession(token: string) {
     localStorage.setItem('token', token);
-    console.log(JSON.parse(atob(token.split('.')[1])));
-
-
-//    this.sessionSubject.next()
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    this.session = {
+      token: token,
+      ...tokenPayload,
+    }
   }
 
-  removeSession() {}
+  removeSession() {
+    this.session = this.sessionInitialState;
+    localStorage.removeItem('token');
+  }
 
-  getSession() {}
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
-  isLogged() {}
+  getExpirationTime(): number {
+    return this.session.exp;
+  }
+
+  getUsername(): string {
+    return this.session.username;
+  }
+
+  isLogged(): boolean {
+    const token = localStorage.getItem('token');
+
+    if (!token) return false;
+
+    if (isNaN(this.session.exp)) {
+      this.setSession(token)
+    }
+
+    const parsedExp = dayjs.unix(this.session.exp);
+    const tokenHasExpired = parsedExp.isBefore(dayjs());
+
+    return !tokenHasExpired;
+  }
 }

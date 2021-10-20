@@ -11,14 +11,18 @@
   padding: 12px 8px;
   margin: 1em 0;
 
-  .new__todo__input {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    height: 100%;
+  .new__todo__form {
     flex-grow: 1;
-    font-family: var(--main-font-400);
-    color: var(--secondary-foreground-color);
-    font-size: .85em;
+
+
+    .new__todo__input {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      height: 100%;
+      font-family: var(--main-font-400);
+      color: var(--secondary-foreground-color);
+      font-size: .85em;
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 export interface TodoItem {
-  itemId: string;
+  id: string;
   status: 'active' | 'completed',
   description: string,
 }
@@ -28,6 +28,6 @@ export class TodoItemComponent implements OnInit {
   }
 
   onDeleteButtonClick() {
-    this.itemDeleted.emit(this.todoItem.itemId);
+    this.itemDeleted.emit(this.todoItem.id);
   }
 }

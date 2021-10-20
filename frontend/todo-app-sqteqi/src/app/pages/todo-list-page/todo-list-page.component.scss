@@ -22,8 +22,22 @@ h1 {
       box-shadow: var(--element-shadow);
 
       .todos__list {
+        position: relative;
+        min-height: 20vh;
+        background-color: var(--element-background-color);
         padding: 0;
         margin: 0;
+
+        .no__todos__msg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+          color: var(--secondary-foreground-color);
+          font-family: var(--main-font-700);
+          margin: 0;
+        }
       }
     }
 

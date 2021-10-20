@@ -1,3 +1,4 @@
+import { appRoutes } from './../../routes';
 import { Router } from '@angular/router';
 import { ErrorHandlingService } from './../../core/services/error-handling.service';
 import { SessionService } from './../../core/services/session.service';
@@ -43,16 +44,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.subscribeToFormChanges();
-    this.username?.valueChanges.subscribe(a => console.log(a));
-  }
-
-  onBlur(event: any) {
-    console.log(event.target.id);
-
   }
 
   private subscribeToFormChanges() {
-
     const formChangesSubscription = this.loginForm.valueChanges.subscribe(changes => {
       this.inputError = { display: false, msg: '' };
       if (this.loginForm?.errors?.fieldsDoesNotMatch) {
@@ -103,7 +97,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
       const registerSubscription = this.auth.register(credentials).subscribe(
         res => this.handleSuccessfulRegister(res),
-        err => console.log(err)
+        err => this.handleRegisterError(err)
       );
       this.subscriptions.push(registerSubscription);
     }
@@ -122,11 +116,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   private handleSuccessfulLogin(response: any) {
     const {access_token} = response;
     this.session.setSession(access_token);
-    this.router.navigate(['todo-list']);
+    this.router.navigate([appRoutes.TODO_LIST]);
   }
 
   private handleLoginError(error: any) {
-    console.log(error.status);
     if(error.status === 401) {
       this.inputError = {display: true, msg: 'Wrong user or password'};
     } else {

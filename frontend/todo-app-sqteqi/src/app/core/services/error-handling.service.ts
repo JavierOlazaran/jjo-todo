@@ -1,3 +1,4 @@
+import { appRoutes } from './../../routes';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -11,6 +12,6 @@ export class ErrorHandlingService {
   ) { }
 
   gotoErrorPage() {
-    this.router.navigate(['error']);
+    this.router.navigate([appRoutes.ERROR]);
   }
 }

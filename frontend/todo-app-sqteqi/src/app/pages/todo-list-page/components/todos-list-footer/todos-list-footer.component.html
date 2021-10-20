@@ -1,9 +1,9 @@
 <footer class="todo_list__footer">
-  <p class="items__left__text">asdasd</p>
+  <p class="items__left__text">{{totalItems}} items left</p>
   <div class="todos__filters__container">
-    <button class="todos__filter__btn">All</button>
-    <button class="todos__filter__btn">Active</button>
-    <button class="todos__filter__btn">Completed</button>
+    <button class="todos__filter__btn" (click)="onButtonEvent('FILTER_ALL')">All</button>
+    <button class="todos__filter__btn" (click)="onButtonEvent('FILTER_ACTIVE')">Active</button>
+    <button class="todos__filter__btn" (click)="onButtonEvent('FILTER_COMPLETED')">Completed</button>
   </div>
-  <button class="todos__filter__btn">Clear Completed</button>
+  <button class="todos__filter__btn" (click)="onButtonEvent('CLEAR_COMPLETED')">Clear Completed</button>
 </footer>

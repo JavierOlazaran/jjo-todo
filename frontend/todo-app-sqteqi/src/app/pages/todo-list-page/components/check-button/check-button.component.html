@@ -1,5 +1,6 @@
 <button
   (click)="onButtonClicked()"
+  (mouseup)="onMouseup($event)"
   class="check__btn"
   [ngClass]="{'checked' : checked,  'unchecked' : !checked}"
 >

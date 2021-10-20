@@ -1,4 +1,6 @@
 <div class="new__todo__component__container">
-  <app-check-button></app-check-button>
-  <input class="new__todo__input" type="text" placeholder="Create a new todo...">
+  <app-check-button [checked]="checked" (checkClicked)="submitTodo()" (mouseUp)="onBtnMouseup()"></app-check-button>
+  <form [formGroup]="newTodoForm" (ngSubmit)="submitTodo()" class="new__todo__form">
+    <input (ngSubmit)="submitTodo()" formControlName="description" class="new__todo__input" type="text" placeholder="Create a new todo...">
+  </form>
 </div>

@@ -5,10 +5,18 @@
     <app-new-todo></app-new-todo>
 
     <div class="list__container">
-      <ul class="todos__list">
-        <app-todo-item *ngFor="let todo of todos" [todoItem]="todo"></app-todo-item>
+      <div class="todos__list" *ngIf="todos.length === 0" >
+        <p class="no__todos__msg">Start creating todos...</p>
+      </div>
+      <ul class="todos__list" *ngIf="todos.length > 0" >
+        <app-todo-item *ngFor="let todo of todos" [todoItem]="todo"
+          (itemDeleted)="deleteTodo($event)"
+          (itemStatusChanged)="updateItemStatus($event)"
+        ></app-todo-item>
       </ul>
-      <app-todos-list-footer></app-todos-list-footer>
+      <app-todos-list-footer
+        (buttonEvent)="onFooterButtonClick($event)"
+      ></app-todos-list-footer>
     </div>
 
     <p class="drag_and_drop__msg">Drag and drop to reorder list</p>

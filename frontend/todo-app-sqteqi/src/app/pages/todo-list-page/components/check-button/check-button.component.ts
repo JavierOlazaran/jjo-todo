@@ -1,23 +1,35 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-check-button',
   templateUrl: './check-button.component.html',
   styleUrls: ['./check-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class CheckButtonComponent implements OnInit {
 
-  checked: boolean = false;
-  @Output() checkClicked = new EventEmitter<boolean>();
+  @Input()
+  set checked(value: boolean) {
+    this._checked = value;
+  }
+  get checked(): boolean { return this._checked };
+  private _checked: boolean = false;
 
-  constructor() { }
+  @Output() checkClicked = new EventEmitter<boolean>();
+  @Output() mouseUp = new EventEmitter<MouseEvent>();
+
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
 
   onButtonClicked() {
-    this.checked = !this.checked;
-    this.checkClicked.emit(this.checked);
+    this._checked = !this._checked;
+    this.checkClicked.emit(this._checked);
+  }
+
+  onMouseup(event: MouseEvent) {
+    this.mouseUp.emit(event);
   }
 }

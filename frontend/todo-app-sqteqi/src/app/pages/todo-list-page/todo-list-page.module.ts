@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,7 +26,8 @@ import { DeleteButtonComponent } from './components/delete-button/delete-button.
   imports: [
     SharedModule,
     CommonModule,
-    TodoListRoutingModule
+    TodoListRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class TodoListModule { }
