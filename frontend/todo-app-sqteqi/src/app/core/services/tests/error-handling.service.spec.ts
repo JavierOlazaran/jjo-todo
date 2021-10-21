@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { ErrorHandlingService } from '../error-handling.service';
@@ -6,7 +7,11 @@ describe('ErrorHandlingService', () => {
   let service: ErrorHandlingService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ]
+    });
     service = TestBed.inject(ErrorHandlingService);
   });
 

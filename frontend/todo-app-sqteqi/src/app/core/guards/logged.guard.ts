@@ -9,26 +9,32 @@ import { Observable } from 'rxjs';
 })
 export class LoggedGuard implements CanActivate, CanLoad {
 
+  isUserLogged = false;
+
   constructor(
     private session: SessionService,
     private router: Router
-  ) {}
+  ) {
+    this.isUserLogged = this.session.isLogged();
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if (!this.session.isLogged()) {
-        this.router.navigate([appRoutes.LOGIN]);
-      }
-    return this.session.isLogged();
+    if (!this.isUserLogged) {
+      this.router.navigate([appRoutes.LOGIN]);
+      return this.isUserLogged;
+    }
+    return this.isUserLogged;
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (!this.session.isLogged()) {
+      if (!this.isUserLogged) {
         this.router.navigate([appRoutes.LOGIN]);
       }
-    return this.session.isLogged();
+    return this.isUserLogged;
   }
 }
