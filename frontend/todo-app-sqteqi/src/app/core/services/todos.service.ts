@@ -1,5 +1,5 @@
 import { TodoItem } from './../../pages/todo-list-page/components/todo-item/todo-item.component';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -23,7 +23,7 @@ export class TodosService {
     return this.http.delete(`${this.todosUrl}/${itemId}`);
   }
 
-  createTodo(newItem: any): Observable<any> {
+  createTodo(newItem: TodoItem): Observable<any> {
     return this.http.post(this.todosUrl, newItem);
   }
 
