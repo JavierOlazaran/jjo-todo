@@ -93,4 +93,18 @@ describe('CheckButtonComponent', () => {
       expect(outputSpy).toHaveBeenCalledWith(false);
     })
   });
+
+  describe('on mouseUp', () => {
+
+    test('should emit the mouseUpEvent', () => {
+      const onMouseupSpy = jest.spyOn(component, 'onMouseup');
+      const mouseUpOutputSpy = jest.spyOn(component.mouseUp, 'emit');
+      let buttonDebugE = fixture.debugElement.query(By.css('.check__btn'));
+
+      buttonDebugE.triggerEventHandler('mouseup', {});
+
+      expect(onMouseupSpy).toHaveBeenCalled()
+      expect(mouseUpOutputSpy).toHaveBeenCalled()
+    });
+  });
 });
