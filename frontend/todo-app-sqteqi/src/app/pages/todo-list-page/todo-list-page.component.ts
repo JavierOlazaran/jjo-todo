@@ -17,19 +17,21 @@ export class TodoListComponent implements OnInit, OnDestroy {
   userTodos: TodoItem[] = [];
   activeTodosLeft: number = 0;
 
-  private footerActionEventsMap!: Map<footerButtonEvent, any>;
+  private footerActionEventsMap: Map<footerButtonEvent, any>;
 
   constructor(
     private todosSvc: TodosService,
     private errorSvc: ErrorHandlingService
-  ) {}
+  ) {
 
-  ngOnInit(): void {
     this.footerActionEventsMap = new Map<footerButtonEvent, any>([
       ['FILTER_ACTIVE', this.filterActive],
       ['FILTER_COMPLETED', this.filterCompleted],
       ['FILTER_ALL', this.filterAll],
     ]);
+  }
+
+  ngOnInit(): void {
     this.getUserTodos();
   }
 
@@ -37,7 +39,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  onFooterButtonClick(event: any) {
+  onFooterButtonClick(event: footerButtonEvent) {
       this.todos = this.footerActionEventsMap.get(event)(this.userTodos);
   }
 
