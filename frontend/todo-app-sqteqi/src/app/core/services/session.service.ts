@@ -5,7 +5,7 @@ export interface Session {
   token: string;
   exp: number;
   iat: number;
-  username: string;
+  user: string;
 }
 
 @Injectable({
@@ -17,37 +17,39 @@ export class SessionService {
     token: '',
     exp: NaN,
     iat: NaN,
-    username: ''
+    user: ''
   };
 
-  session: Session = this.sessionInitialState;
+  private _session: Session = this.sessionInitialState;
 
   constructor() {}
 
   setSession(token: string) {
     localStorage.setItem('token', token);
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-    this.session = {
+    this._session = {
       token: token,
       ...tokenPayload,
     }
   }
 
   removeSession() {
-    this.session = this.sessionInitialState;
+    this._session = this.sessionInitialState;
     localStorage.removeItem('token');
   }
 
-  getToken(): string | null {
+  get session() { return this._session };
+
+  get token(): string | null {
     return localStorage.getItem('token');
   }
 
-  getExpirationTime(): number {
-    return this.session.exp;
+  get exp(): number {
+    return this._session.exp;
   }
 
-  getUsername(): string {
-    return this.session.username;
+  get username(): string {
+    return this._session.user;
   }
 
   isLogged(): boolean {
@@ -55,11 +57,11 @@ export class SessionService {
 
     if (!token) return false;
 
-    if (isNaN(this.session.exp)) {
+    if (isNaN(this._session.exp)) {
       this.setSession(token)
     }
 
-    const parsedExp = dayjs.unix(this.session.exp);
+    const parsedExp = dayjs.unix(this._session.exp);
     const tokenHasExpired = parsedExp.isBefore(dayjs());
 
     return !tokenHasExpired;

@@ -1,3 +1,4 @@
+import { ThemeService } from './../../../core/theme-handling/services/theme.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodosListHeaderComponent } from './todos-list-header.component';
@@ -11,7 +12,10 @@ describe('TodosListHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TodosListHeaderComponent ]
+      declarations: [ TodosListHeaderComponent ],
+      providers: [
+        { provide: ThemeService, useValue: themeServiceMock },
+      ]
     })
     .compileComponents();
   });

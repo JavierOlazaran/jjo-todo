@@ -37,23 +37,26 @@ export class LoginComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private session: SessionService,
     private errorSvc: ErrorHandlingService,
-    private router: Router
+    private router: Router,
   ) { }
 
-
   ngOnInit(): void {
-
     this.subscribeToFormChanges();
   }
 
   private subscribeToFormChanges() {
     const formChangesSubscription = this.loginForm.valueChanges.subscribe(changes => {
-      this.inputError = { display: false, msg: '' };
-      if (this.loginForm?.errors?.fieldsDoesNotMatch) {
-        this.inputError = { display: true, msg: 'Passwords do not match' };
-      }
+      this.handleFormChanges();
     });
+
     this.subscriptions.push(formChangesSubscription);
+  }
+
+  private handleFormChanges() {
+    this.inputError = { display: false, msg: '' };
+    if (this.loginForm?.errors?.fieldsDoesNotMatch) {
+      this.inputError = { display: true, msg: 'Passwords do not match' };
+    }
   }
 
   ngOnDestroy(): void {
@@ -69,43 +72,52 @@ export class LoginComponent implements OnInit, OnDestroy {
   setRegister() {
       this.register = !this.register;
       if (!this.register) {
-        this.confirmPassword?.clearValidators();
-        this.confirmPassword?.updateValueAndValidity();
-        this.loginForm.clearValidators();
-        this.loginForm.updateValueAndValidity();
+        this.clearControlsValidators(this.loginForm, ["confirmPassword"]);
       } else {
-        this.confirmPassword?.setValidators(Validators.required);
-        this.confirmPassword?.updateValueAndValidity();
-        this.loginForm.setValidators(customValidators.matchValidator('password','confirmPassword'));
-        this.loginForm.updateValueAndValidity();
+        this.setValidators();
       }
       this.submitButtonText = this.register ? 'Register' : 'Login';
       this.secondaryButtonText = this.register ? 'Login' : 'Register';
   }
 
+  private clearControlsValidators(form: FormGroup, controls?: string[] ) {
+    this.confirmPassword?.clearValidators();
+    this.confirmPassword?.updateValueAndValidity();
+    this.loginForm.clearValidators();
+    this.loginForm.updateValueAndValidity();
+  }
+
+
+  private setValidators() {
+    this.confirmPassword?.setValidators(Validators.required);
+    this.confirmPassword?.updateValueAndValidity();
+    this.loginForm.setValidators(customValidators.matchValidator('password', 'confirmPassword'));
+    this.loginForm.updateValueAndValidity();
+  }
+
   submit() {
-    const credentials = {
-      username: this.username?.value,
-      password: this.password?.value,
-    }
-    if (!this.register) {
-      const loginSubscription = this.auth.login(credentials).subscribe(
-        res => this.handleSuccessfulLogin(res),
-        err => this.handleLoginError(err)
-      );
-      this.subscriptions.push(loginSubscription);
-    } else {
-      const registerSubscription = this.auth.register(credentials).subscribe(
-        res => this.handleSuccessfulRegister(res),
-        err => this.handleRegisterError(err)
-      );
-      this.subscriptions.push(registerSubscription);
+    if (this.loginForm.valid) {
+      const credentials = {
+        username: this.username?.value,
+        password: this.password?.value,
+      }
+      if (!this.register) {
+        const loginSubscription = this.auth.login(credentials).subscribe(
+          res => this.handleSuccessfulLogin(res),
+          err => this.handleLoginError(err)
+        );
+        this.subscriptions.push(loginSubscription);
+      } else {
+        const registerSubscription = this.auth.register(credentials).subscribe(
+          res => this.handleSuccessfulRegister(res),
+          err => this.handleRegisterError(err)
+        );
+        this.subscriptions.push(registerSubscription);
+      }
     }
   }
 
   private handleSuccessfulRegister(res: any) {
-    // TODO: Show toast with user created msg.
-
     this.register = false;
   }
 

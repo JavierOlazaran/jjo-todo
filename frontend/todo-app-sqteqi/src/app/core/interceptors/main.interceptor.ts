@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { SessionService } from './../services/session.service';
 import { Injectable } from '@angular/core';
 import {
@@ -25,8 +25,14 @@ export class MainInterceptor implements HttpInterceptor {
     this.authUrl = `${environment.envConstants.apiBaseUrl}${environment.envConstants.authEndpoint}`;
   }
 
+  /**
+   * Adds Http headers. If the request is not for the auth endpoints it also adds the token,
+   * @param request
+   * @param next
+   * @returns
+   */
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const authToken = `Bearer ${this.session.getToken()}`;
+    const authToken = `Bearer ${this.session.token}`;
     if (!request.url.startsWith(this.authUrl)) {
       this.headers = this.headers.set('Authorization', authToken);
     }
