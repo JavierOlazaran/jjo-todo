@@ -16,8 +16,7 @@ export class NewTodoComponent implements OnInit {
   @Output() sendNewTodo = new EventEmitter()
   checked = false;
 
-  constructor(
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
