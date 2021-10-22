@@ -12,7 +12,6 @@ import { TodosService } from './../../core/services/todos.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoListComponent } from './todo-list-page.component';
-import { TodosListFiltersComponent } from './components/todos-list-filters/todos-list-filters.component';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -112,7 +111,6 @@ describe('TodoListComponent', () => {
         TodoListComponent,
         NewTodoComponent,
         TodosListFooterComponent,
-        TodosListFiltersComponent,
         CheckButtonComponent,
         TodoItemComponent,
         DeleteButtonComponent,
