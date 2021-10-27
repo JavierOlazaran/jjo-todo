@@ -9,10 +9,19 @@
         <p class="no__todos__msg">Start creating todos...</p>
       </div>
       <ul class="todos__list" *ngIf="todos.length > 0" >
-        <app-todo-item *ngFor="let todo of todos" [todoItem]="todo"
-          (itemDeleted)="deleteTodo($event)"
-          (itemStatusChanged)="updateItemStatus($event)"
-        ></app-todo-item>
+        <div class="draggable_item_wrapper" *ngFor="let todo of todos; let index = index"
+          [class.dragging]="index === this.draggingIndex"
+          [draggable]="true"
+          (dragstart)="onDragStart(index)"
+          (dragenter)="onDragEnter(index)"
+          (dragend)="onDragEnd()"
+        >
+          <app-todo-item
+            [todoItem]="todo"
+            (itemDeleted)="deleteTodo($event)"
+            (itemStatusChanged)="updateItemStatus($event)"
+          ></app-todo-item>
+        </div>
       </ul>
       <app-todos-list-footer
         [totalItems]="activeTodosLeft"

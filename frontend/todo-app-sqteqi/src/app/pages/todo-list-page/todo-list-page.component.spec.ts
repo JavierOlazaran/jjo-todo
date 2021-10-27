@@ -327,8 +327,39 @@ describe('TodoListComponent', () => {
 
       expect(errorServiceMock.gotoErrorPage).toHaveBeenCalled();
     });
+  });
 
+  describe('Drag and drop', () => {
 
-  })
+    test('should register the item being dragged', () => {
+      component.onDragStart(2);
+      expect(component.draggingIndex).toEqual(2);
 
+      component.onDragStart(4);
+      expect(component.draggingIndex).toEqual(4);
+
+      component.onDragStart(0);
+      expect(component.draggingIndex).toEqual(0);
+    });
+  });
+
+  test('should call reorder every time drags enters a different item', () => {
+    const reorderItemSpy = jest.spyOn<any, any>(component, 'reorderItem');
+    component.draggingIndex = 1;
+    component.onDragEnter(1);
+
+    expect(reorderItemSpy).not.toHaveBeenCalled();
+
+    component.draggingIndex = 3;
+    component.onDragEnter(1);
+
+    expect(reorderItemSpy).toHaveBeenCalledWith(3, 1);
+  });
+
+  test('should nullify draggingIndex on drag end', () => {
+    component.draggingIndex = 8;
+    component.onDragEnd();
+
+    expect(component.draggingIndex).toEqual(NaN);
+  });
 });

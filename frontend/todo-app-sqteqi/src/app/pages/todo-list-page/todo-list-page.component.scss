@@ -53,6 +53,15 @@ h1 {
   }
 }
 
+.draggable_item_wrapper {
+  cursor: grab;
+  &.dragging {
+    opacity: 0;
+    transform: scale(1.1, 1.1);
+    box-shadow: var(--element-shadow);
+  }
+}
+
 @media (min-width: 376px)  {
   // .todo_list__page__container{
   //   background-image: url('../../../assets/images/bg-desktop-dark.jpg');

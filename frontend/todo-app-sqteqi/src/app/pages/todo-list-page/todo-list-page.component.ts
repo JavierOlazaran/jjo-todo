@@ -17,6 +17,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   userTodos: TodoItem[] = [];
   activeTodosLeft: number = 0;
 
+  draggingIndex!: number;
   private footerActionEventsMap: Map<footerButtonEvent, any>;
 
   constructor(
@@ -101,5 +102,25 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   setActiveItemsCount() {
     this.activeTodosLeft = this.userTodos.filter(item => item.status === 'active').length;
+  }
+
+  onDragStart(event: any) {
+    this.draggingIndex = event;
+  }
+
+  onDragEnter(toIndex: number): void {
+    if (this.draggingIndex !== toIndex) {
+      this.reorderItem(this.draggingIndex, toIndex);
+    }
+  }
+
+  onDragEnd(): void {
+    this.draggingIndex = NaN;
+  }
+
+  private reorderItem(fromIndex: number, toIndex: number): void {
+    const itemToBeReordered = this.todos.splice(fromIndex, 1)[0];
+    this.todos.splice(toIndex, 0, itemToBeReordered);
+    this.draggingIndex = toIndex;
   }
 }
