@@ -1,6 +1,6 @@
 import { CreateTodoRequestDTO } from './models/todos.dto';
 import { db } from './../mock.db';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Injectable, HttpException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 @Injectable()

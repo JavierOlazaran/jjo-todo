@@ -1,16 +1,16 @@
-import { RegisterUserRequestDTO } from './../models/auth.dtos';
 import { AuthService } from './../auth.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from '../auth.controller';
 
 describe('AuthController', () => {
   let controller: AuthController;
-  const mockUser: RegisterUserRequestDTO = {
+  const mockUser = {
     userName: "mockUser",
     password: "mockPassword"
   }
   const authServiceMock = {
-    registerUser: jest.fn((newUser: RegisterUserRequestDTO) => newUser.userName),
+    registerUser: jest.fn((newUser) => newUser.userName),
+    login: jest.fn()
   }
 
   beforeEach(async () => {
@@ -32,11 +32,16 @@ describe('AuthController', () => {
     
     test('should call registerUser method from auth service', () => {
       const createUserSpy = jest.spyOn(authServiceMock, "registerUser");
-      controller.registerUser(mockUser);
+      controller.register(mockUser);
 
       expect(createUserSpy).toHaveBeenCalledWith(mockUser);
-    })
+    });
     
-  })
-  
+    test('should call registerUser method from auth service', () => {
+      const loginSpy = jest.spyOn(authServiceMock, 'login');
+      controller.login(mockUser);
+
+      expect(loginSpy).toHaveBeenCalledWith(mockUser);
+    });    
+  });
 });

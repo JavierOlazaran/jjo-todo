@@ -15,7 +15,7 @@ export class TodosController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':todoId')
-  async getTodoById(@Headers('authorization') authorization: string, @Param('todoId') todoId: string) {
+  async getTodoById( @Param('todoId') todoId: string,@Headers('authorization') authorization: string) {
     return await this.todosSvc.getTodoById(todoId, authorization);
   }
 
