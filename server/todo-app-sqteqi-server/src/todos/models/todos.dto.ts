@@ -42,3 +42,7 @@ export class TodoPatchActionDTO {
 export class TodoPatchResponseDTO {
     todo: TodoItem;
 }
+
+export class DeleteTodoResponseDTO {
+    deleted: string;
+}

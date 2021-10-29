@@ -1,6 +1,7 @@
 import {
 	CreateTodoRequestDTO,
 	CreateTodoResponseDTO,
+	DeleteTodoResponseDTO,
 	GetAllTodosResponseDTO,
 	GetTodoDTO,
 	TodoPatchActionDTO,
@@ -19,6 +20,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Provider,
 	Put,
 	UseGuards,
 } from "@nestjs/common";
@@ -80,7 +82,7 @@ export class TodosController {
 	async deleteTodo(
 		@Headers("authorization") authorization: string,
 		@Param("todoId") todoId: string
-	) {
+	): Promise<DeleteTodoResponseDTO> {
 		return await this.todosSvc.deleteTodo(authorization, todoId);
 	}
 

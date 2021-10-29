@@ -1,5 +1,5 @@
 import { TodoItem } from './models/todos.classes';
-import { CreateTodoRequestDTO, CreateTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO, TodoPatchActionDTO, TodoPatchResponseDTO, UpdateTodoRequestDTO, UpdateTodoResponseDTO } from './models/todos.dto';
+import { CreateTodoRequestDTO, CreateTodoResponseDTO, DeleteTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO, TodoPatchActionDTO, TodoPatchResponseDTO, UpdateTodoRequestDTO, UpdateTodoResponseDTO } from './models/todos.dto';
 import { AuthService } from '../auth/auth.service';
 import { Injectable, HttpException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
@@ -66,7 +66,7 @@ export class TodosService {
         return { todo: patchedTodo };
     }
 
-    async deleteTodo(jwtToken: string, todoId) {
+    async deleteTodo(jwtToken: string, todoId): Promise<DeleteTodoResponseDTO> {
         const user = await this.authSvc.getUserNameFromToken(jwtToken);
         const itemIndex = this.dataSvc.db.find(_user => _user.username === user).todos.findIndex(item => item.id === todoId);
         this.dataSvc.db.find(_user => _user.username === user).todos
