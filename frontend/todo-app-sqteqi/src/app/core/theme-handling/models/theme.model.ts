@@ -1,4 +1,5 @@
 export interface Theme {
   themeId: string;
-  props: any
+  props: Map<string, string>;
 }
+

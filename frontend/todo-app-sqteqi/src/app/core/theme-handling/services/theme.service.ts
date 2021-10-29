@@ -22,8 +22,8 @@ export class ThemeService {
   private setTheme(theme: Theme) {
     this.activeTheme = theme;
 
-    for(let property in this.activeTheme.props) {
-      document.documentElement.style.setProperty(property, this.activeTheme.props[property]);
-    }
+    this.activeTheme.props.forEach((value, key) => {
+      document.documentElement.style.setProperty(key, value);
+    })
   }
 }

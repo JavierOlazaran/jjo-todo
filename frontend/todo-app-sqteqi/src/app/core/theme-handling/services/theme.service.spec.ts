@@ -35,18 +35,18 @@ describe('ThemeService', () => {
       service["activeTheme"] = darkTheme;
       service.toggleTheme();
 
-      for (let property in lightTheme.props) {
-        expect(document.documentElement.style.getPropertyValue(property))
-        .toEqual(lightTheme.props[property]);
-      }
+      lightTheme.props.forEach((value, key) => {
+        expect(document.documentElement.style.getPropertyValue(key))
+        .toEqual(value);
+      })
 
       service["activeTheme"] = lightTheme;
       service.toggleTheme();
 
-      for (let property in darkTheme.props) {
-        expect(document.documentElement.style.getPropertyValue(property))
-        .toEqual(darkTheme.props[property]);
-      }
+      darkTheme.props.forEach((value, key) => {
+        expect(document.documentElement.style.getPropertyValue(key))
+        .toEqual(value);
+      });
     })
   });
 });
