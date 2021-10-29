@@ -13,7 +13,7 @@ describe('AuthService', () => {
     sign: jest.fn((userObj): string => {
       return 'tokenized' + userObj.user;
     }),
-    decode: jest.fn()
+    decode: jest.fn().mockReturnValue({user: 'someUser', exp: 132132131, iat: 123456789})
   };
   const userSvcMock = {
     findUser: jest.fn((user: any) => {
