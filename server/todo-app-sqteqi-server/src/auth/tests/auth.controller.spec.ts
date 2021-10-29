@@ -5,11 +5,11 @@ import { AuthController } from '../auth.controller';
 describe('AuthController', () => {
   let controller: AuthController;
   const mockUser = {
-    userName: "mockUser",
+    username: "mockUser",
     password: "mockPassword"
   }
   const authServiceMock = {
-    registerUser: jest.fn((newUser) => newUser.userName),
+    registerUser: jest.fn((newUser) => newUser.username),
     login: jest.fn()
   }
 

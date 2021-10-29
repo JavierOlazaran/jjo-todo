@@ -1,3 +1,4 @@
+import { DeletedTodo } from '../models/todos.model';
 import { TodoItem } from './../../pages/todo-list-page/components/todo-item/todo-item.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,23 +16,23 @@ export class TodosService {
     private http: HttpClient
   ) { }
 
-  getTodos(): Observable<any> {
-    return this.http.get(this.todosUrl);
+  getTodos(): Observable<TodoItem[]> {
+    return this.http.get<TodoItem[]>(this.todosUrl);
   }
 
-  deleteTodo(itemId: string): Observable<any> {
-    return this.http.delete(`${this.todosUrl}/${itemId}`);
+  deleteTodo(itemId: string): Observable<DeletedTodo> {
+    return this.http.delete<DeletedTodo>(`${this.todosUrl}/${itemId}`);
   }
 
-  createTodo(newItem: TodoItem): Observable<any> {
-    return this.http.post(this.todosUrl, newItem);
+  createTodo(newItem: TodoItem): Observable<TodoItem> {
+    return this.http.post<TodoItem>(this.todosUrl, newItem);
   }
 
-  updateTodoStatus(item: TodoItem): Observable<any> {
-    return this.http.patch(`${this.todosUrl}/${item.id}`, {op: "update_status", value: item.status});
+  updateTodoStatus(item: TodoItem): Observable<TodoItem> {
+    return this.http.patch<TodoItem>(`${this.todosUrl}/${item.id}`, {op: "update_status", value: item.status});
   }
 
-  deleteCompletedTodos(): Observable<any>{
-    return this.http.delete(`${this.todosUrl}/delete/completed`);
+  deleteCompletedTodos(): Observable<TodoItem[]>{
+    return this.http.delete<TodoItem[]>(`${this.todosUrl}/delete/completed`);
   }
 }

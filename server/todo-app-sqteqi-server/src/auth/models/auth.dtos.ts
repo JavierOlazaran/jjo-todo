@@ -4,7 +4,7 @@ import { IsString, IsNotEmpty } from "class-validator";
 export class LoginUserRequestDTO {
     @IsString()
     @IsNotEmpty()
-    userName: string;
+    username: string;
 
     @IsString()
     @IsNotEmpty()

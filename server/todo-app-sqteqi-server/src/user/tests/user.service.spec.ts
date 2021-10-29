@@ -1,3 +1,4 @@
+import { HttpException } from '@nestjs/common';
 import { DataService } from '../../data/mock.db.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from '../user.service';
@@ -7,7 +8,7 @@ describe('UserService', () => {
   const dataSvcMock = {
     db: [
       {
-        userName: 'user1',
+        username: 'user1',
         password: '12345',
         todos: [
           {
@@ -43,7 +44,7 @@ describe('UserService', () => {
         ]
       },
       {
-        userName: 'user2',
+        username: 'user2',
         password: '12345',
         todos: [
           {
@@ -96,15 +97,30 @@ describe('UserService', () => {
     });
   });
 
-  test('should save user', async () => {
-    const expectedNewUser = {userName: 'newUser', password: 'newPassword', todos: []};
+  test('should not save user and return a 403 error code', async () => {
+    const newUserToAdd = {username: 'user1', password: 'someOtherPassword'}
+    const previousDBStatus = dataSvcMock.db;
 
-    expect(dataSvcMock.db.find(user => user.userName === 'newUser')).toBeFalsy();
+    await service.saveNewUser(newUserToAdd)
+    .then(response => {
+      fail('403 Exception expected')
+    })
+    .catch(err => {
+      expect(dataSvcMock.db).toEqual(previousDBStatus);
+      expect(err).toEqual(new HttpException('User already exists', 403));
+    })
+  })
+  
+
+  test('should save user', async () => {
+    const expectedNewUser = {username: 'newUser', password: 'newPassword', todos: []};
+
+    expect(dataSvcMock.db.find(user => user.username === 'newUser')).toBeFalsy();
     expect(dataSvcMock.db.length).toEqual(2);
 
-    await service.saveNewUser({userName: 'newUser', password: 'newPassword'}).then(response => {
+    await service.saveNewUser({username: 'newUser', password: 'newPassword'}).then(response => {
 
-      expect(dataSvcMock.db.find(user => user.userName === 'newUser')).toEqual(expectedNewUser);
+      expect(dataSvcMock.db.find(user => user.username === 'newUser')).toEqual(expectedNewUser);
       expect(dataSvcMock.db.length).toEqual(3);
       expect(response).toEqual(expectedNewUser);
     });

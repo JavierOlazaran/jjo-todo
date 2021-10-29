@@ -1,7 +1,9 @@
+import { UserCredentials, UserRecord } from './../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { LoginResponseDTO } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +16,11 @@ export class AuthService {
     private http: HttpClient
   ) {}
 
-  login(credentials: {username: string, password: string}): Observable<any>{
-    return this.http.post(`${this.authEndpointUrl}/login`, credentials);
+  login(credentials: UserCredentials): Observable<LoginResponseDTO>{
+    return this.http.post<LoginResponseDTO>(`${this.authEndpointUrl}/login`, credentials);
   }
 
-  register(credentials: {username: string, password: string}): Observable<any>{
-    return this.http.post(`${this.authEndpointUrl}/register`, credentials)
+  register(credentials: UserCredentials): Observable<UserRecord>{
+    return this.http.post<UserRecord>(`${this.authEndpointUrl}/register`, credentials)
   }
 }

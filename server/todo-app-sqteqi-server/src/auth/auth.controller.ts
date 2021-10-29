@@ -10,7 +10,7 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Body() user) {
-        return await this.authSvc.login(user.username);
+        return await this.authSvc.login(user);
     }
 
     @Post('register')

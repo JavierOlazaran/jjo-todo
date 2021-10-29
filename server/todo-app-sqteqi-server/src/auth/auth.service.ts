@@ -12,14 +12,12 @@ export class AuthService {
     ) {}
     
     async login(user: string) {
-        console.log(user);
-        
         return {access_token: this.jwt.sign({user: user})};
     }
 
     async validateCredentials(userName: string, password: string): Promise<any> {
         const user = await this.userSvc.findUser(userName);
-        if (user && user.password === password) return user.userName;
+        if (user && user.password === password) return user.username;
         return null;
     }
 

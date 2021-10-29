@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException } from '@nestjs/common';
 import { DataService } from '../data/mock.db.service';
 import { RegisterUserRequestDTO } from './model/user.model';
 
@@ -15,15 +15,18 @@ export class UserService {
     ) {}
 
     async saveNewUser(newUser: RegisterUserRequestDTO) {
+        if (this.dataSvc.db.find(user => user.username === newUser.username)) {
+            throw new HttpException('User already exists', 403);
+        }
         this.dataSvc.db.push({
             ...newUser,
             todos: [],
         });
 
-        return await this.dataSvc.db.find(user => user.userName === newUser.userName);
+        return await this.dataSvc.db.find(user => user.username === newUser.username);
     }
 
     async findUser(userName: string) {
-        return await this.dataSvc.db.find(user => user.userName === userName);
+        return await this.dataSvc.db.find(user => user.username === userName);
     }
 }

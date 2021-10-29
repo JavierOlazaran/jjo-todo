@@ -6,11 +6,11 @@ import { AuthService } from '../auth.service';
 describe('AuthService', () => {
   let service: AuthService;
   const mockUser = {
-    userName: 'testUser',
+    username: 'testUser',
     password: 'testPassword'
   }
   const jwtServiceMock = {
-    sign: jest.fn((userObj: {user: string}): string => {
+    sign: jest.fn((userObj): string => {
       return 'tokenized' + userObj.user;
     }),
     decode: jest.fn()
@@ -18,10 +18,10 @@ describe('AuthService', () => {
   const userSvcMock = {
     findUser: jest.fn((user: any) => {
       if (user.userName === 'badUser') return null;
-      if (user.userName === 'testUser') return user.userName;
+      if (user.userName === 'testUser') return user.username;
     }),
     saveNewUser: jest.fn((user: any) => {
-      return user.userName;
+      return user.username;
     }),
   };
 
@@ -42,26 +42,29 @@ describe('AuthService', () => {
     expect(service).toBeDefined();
   });
 
-  test('should should save the new user', () => {
-    service.registerUser(mockUser);
+  test('should should save the new user', async () => {
+    await service.registerUser(mockUser).then(response => {
 
-    expect(userSvcMock.saveNewUser).toHaveBeenCalledWith(mockUser);
-    expect(userSvcMock.saveNewUser).toHaveReturnedWith(mockUser.userName);
+      expect(userSvcMock.saveNewUser).toHaveBeenCalledWith(mockUser);
+      expect(userSvcMock.saveNewUser).toHaveReturnedWith(mockUser.username);
+      expect(response).toEqual(mockUser.username);
+    });
+
   });
 
   test('should should save the new user', () => {
     service.registerUser(mockUser);
 
     expect(userSvcMock.saveNewUser).toHaveBeenCalledWith(mockUser);
-    expect(userSvcMock.saveNewUser).toHaveReturnedWith(mockUser.userName);
+    expect(userSvcMock.saveNewUser).toHaveReturnedWith(mockUser.username);
   });
 
   test('should call login user', () => {
-    service.login(mockUser.userName).then(response => {
+    service.login(mockUser.username).then(response => {
       expect(response).toEqual({access_token: 'tokenizedtestUser'});
     });
 
-    expect(jwtServiceMock.sign).toHaveBeenCalledWith({user: mockUser.userName});
+    expect(jwtServiceMock.sign).toHaveBeenCalledWith({user: mockUser.username});
   });
 
   test('should call validate user', () => {

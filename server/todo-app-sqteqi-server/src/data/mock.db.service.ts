@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { TodoItemObject } from "../todos/models/todos.dto";
 
 export interface MockedDBSchema {
-    userName: string;
+    username: string;
     password: string;
     todos: TodoItemObject[],
 }
@@ -12,7 +12,7 @@ export class DataService {
   
   db: MockedDBSchema[] = [
     {
-      userName: 'user1',
+      username: 'user1',
       password: '12345',
       todos: [
         {
@@ -48,12 +48,12 @@ export class DataService {
       ],
     },
     {
-      userName: 'user2',
+      username: 'user2',
       password: '123456',
       todos: []
     },
     {
-      userName: 'user3',
+      username: 'user3',
       password: '12345678',
       todos: [],
     },

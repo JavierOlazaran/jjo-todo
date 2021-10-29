@@ -8,7 +8,7 @@ describe('TodosService', () => {
   const dataSvcMock= {
     db: [
       {
-        userName: 'user1',
+        username: 'user1',
         password: '12345',
         todos: [
           {
@@ -44,7 +44,7 @@ describe('TodosService', () => {
         ]
       },
       {
-        userName: 'user2',
+        username: 'user2',
         password: '12345',
         todos: [
           {
