@@ -41,7 +41,7 @@ describe('AuthController', () => {
       const loginSpy = jest.spyOn(authServiceMock, 'login');
       controller.login(mockUser);
 
-      expect(loginSpy).toHaveBeenCalledWith(mockUser);
+      expect(loginSpy).toHaveBeenCalledWith(mockUser.username);
     });    
   });
 });

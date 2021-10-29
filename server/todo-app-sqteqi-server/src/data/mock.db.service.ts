@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { TodoItemObject } from "../todos/models/todos.dto";
+import { TodoItem } from "src/todos/models/todos.classes";
 
 export interface MockedDBSchema {
     username: string;
     password: string;
-    todos: TodoItemObject[],
+    todos: TodoItem[],
 }
 
 @Injectable()

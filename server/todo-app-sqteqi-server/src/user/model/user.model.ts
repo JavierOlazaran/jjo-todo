@@ -1,19 +1,10 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { TodoItem } from "src/todos/models/todos.classes";
 
-export class RegisterUserRequestDTO {
-    @IsString()
-    @IsNotEmpty()
+export class User {
     username: string;
-
-    @IsString()
-    @IsNotEmpty()
     password: string;
+    todos: TodoItem[]
 }
-
-export class RegisterUserResponseDTO {
-    userName: string;
-}
-
 export class UserCredentials {
     userName: string;
     password: string;

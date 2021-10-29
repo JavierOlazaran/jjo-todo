@@ -122,7 +122,7 @@ describe('UserService', () => {
 
       expect(dataSvcMock.db.find(user => user.username === 'newUser')).toEqual(expectedNewUser);
       expect(dataSvcMock.db.length).toEqual(3);
-      expect(response).toEqual(expectedNewUser);
+      expect(response).toEqual(expectedNewUser.username);
     });
   })
 });

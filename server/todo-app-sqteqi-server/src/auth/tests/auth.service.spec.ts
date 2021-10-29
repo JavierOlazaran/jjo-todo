@@ -47,7 +47,7 @@ describe('AuthService', () => {
 
       expect(userSvcMock.saveNewUser).toHaveBeenCalledWith(mockUser);
       expect(userSvcMock.saveNewUser).toHaveReturnedWith(mockUser.username);
-      expect(response).toEqual(mockUser.username);
+      expect(response).toEqual({user: mockUser.username});
     });
 
   });

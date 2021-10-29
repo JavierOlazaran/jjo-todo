@@ -1,7 +1,7 @@
 import { UserService } from './../user/user.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { RegisterUserRequestDTO } from '../user/model/user.model';
+import { LoginUserResponseDTO, SaveNewUserResponseDTO, UserCredentialsRequestDTO } from './models/auth.dtos';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +11,7 @@ export class AuthService {
         private userSvc: UserService
     ) {}
     
-    async login(user: string) {
+    async login(user: string): Promise<LoginUserResponseDTO> {
         return {access_token: this.jwt.sign({user: user})};
     }
 
@@ -21,8 +21,9 @@ export class AuthService {
         return null;
     }
 
-    async registerUser(newUser: RegisterUserRequestDTO) {
-        return await this.userSvc.saveNewUser(newUser)
+    async registerUser(newUser: UserCredentialsRequestDTO): Promise<SaveNewUserResponseDTO> {
+        const newUserName = await this.userSvc.saveNewUser(newUser);
+        return { user: newUserName }
     }
 
     async retrieveJwtPayload(jwtToken: string) {

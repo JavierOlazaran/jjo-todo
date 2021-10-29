@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty } from "class-validator";
 
 
-export class LoginUserRequestDTO {
+export class UserCredentialsRequestDTO {
     @IsString()
     @IsNotEmpty()
     username: string;
@@ -13,4 +13,8 @@ export class LoginUserRequestDTO {
 
 export class LoginUserResponseDTO {
     access_token: string;
+}
+
+export class SaveNewUserResponseDTO {
+    user: string;
 }

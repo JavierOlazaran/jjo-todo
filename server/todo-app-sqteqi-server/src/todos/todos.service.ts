@@ -1,4 +1,5 @@
-import { CreateTodoRequestDTO } from './models/todos.dto';
+import { TodoItem } from './models/todos.classes';
+import { CreateTodoRequestDTO, GetAllTodosResponseDTO } from './models/todos.dto';
 import { AuthService } from '../auth/auth.service';
 import { Injectable, HttpException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
@@ -15,17 +16,17 @@ export class TodosService {
         private dataSvc: DataService
         ) {}
 
-    async getAllTodos(jwtToken: string) {
+    async getAllTodos(jwtToken: string):Promise<GetAllTodosResponseDTO> {
         const userName = await this.authSvc.getUserNameFromToken(jwtToken);
-        console.log(this.dataSvc.db);
-        console.log('name', userName);
         
-        const todos = this.dataSvc.db.find(item => {return item.username === userName}).todos;
-        return todos;
+        const todos = this.getUserTodos(userName);
+        return {todos: todos};
     }
 
+    
     async getTodoById(todoId: string ,jwtToken: string) {
-        const todos = await this.getAllTodos(jwtToken);
+        const userName = this.authSvc.getUserNameFromToken(jwtToken);
+        const todos = this.getUserTodos(userName);
         const todo = todos.find(todo => todo.id === todoId);
 
         return todo;
@@ -103,4 +104,9 @@ export class TodosService {
         );
         return dataSvc.db.find(_user => _user.username === user).todos.find(item => item.id === todoId);
     }
+
+    private getUserTodos(userName: any): TodoItem[] {
+        return this.dataSvc.db.find(item => { return item.username === userName; }).todos;
+    }
+
 }

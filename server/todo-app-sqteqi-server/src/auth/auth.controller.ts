@@ -1,7 +1,7 @@
 import { AuthService } from '../auth/auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { RegisterUserRequestDTO } from '../user/model/user.model';
+import { LoginUserResponseDTO, UserCredentialsRequestDTO, SaveNewUserResponseDTO } from './models/auth.dtos';
 
 @Controller('auth')
 export class AuthController {
@@ -9,12 +9,12 @@ export class AuthController {
 
     @UseGuards(LocalAuthGuard)
     @Post('login')
-    async login(@Body() user) {
-        return await this.authSvc.login(user);
+    async login(@Body() user: UserCredentialsRequestDTO): Promise<LoginUserResponseDTO> {
+        return await this.authSvc.login(user.username);
     }
 
     @Post('register')
-    async register(@Body() newUser: RegisterUserRequestDTO) {
+    async register(@Body() newUser: UserCredentialsRequestDTO): Promise<SaveNewUserResponseDTO> {
         return await this.authSvc.registerUser(newUser);
     }
 }

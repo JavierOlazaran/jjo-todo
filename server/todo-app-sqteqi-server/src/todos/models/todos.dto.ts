@@ -1,14 +1,16 @@
-export class TodoItemObject {
-    id: string;
-    description: string;
-    status: string;
-}
-
-export class CreateTodoRequestDTO {
-    description: string;
-    status: string;
-}
+import { IsNotEmpty, IsString } from "class-validator";
+import { TodoItem } from "./todos.classes";
 
 export class GetAllTodosResponseDTO {
-    todos: TodoItemObject [];
+    todos: TodoItem [];
 }
+export class CreateTodoRequestDTO {
+    @IsString()
+    @IsNotEmpty()
+    description: string;
+
+    @IsString()
+    @IsNotEmpty()
+    status: string;
+}
+

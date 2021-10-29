@@ -129,7 +129,7 @@ describe('TodosService', () => {
     await service.getAllTodos('someToken').then(response => {
 
       expect(authServiceMock.getUserNameFromToken).toHaveBeenCalledWith('someToken');
-      expect(response).toEqual(userTodosMock);
+      expect(response).toEqual({todos: userTodosMock});
     });
   });
 

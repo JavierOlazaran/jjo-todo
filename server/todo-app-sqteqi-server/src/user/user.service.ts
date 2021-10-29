@@ -1,6 +1,6 @@
+import { UserCredentialsRequestDTO } from './../auth/models/auth.dtos';
 import { Injectable, HttpException } from '@nestjs/common';
 import { DataService } from '../data/mock.db.service';
-import { RegisterUserRequestDTO } from './model/user.model';
 
 // The data base handling is basic and just made as
 // as example. In real life and with more time,
@@ -14,7 +14,7 @@ export class UserService {
         private dataSvc: DataService
     ) {}
 
-    async saveNewUser(newUser: RegisterUserRequestDTO) {
+    async saveNewUser(newUser: UserCredentialsRequestDTO): Promise<string> {
         if (this.dataSvc.db.find(user => user.username === newUser.username)) {
             throw new HttpException('User already exists', 403);
         }
@@ -23,7 +23,7 @@ export class UserService {
             todos: [],
         });
 
-        return await this.dataSvc.db.find(user => user.username === newUser.username);
+        return await this.dataSvc.db.find(user => user.username === newUser.username).username;
     }
 
     async findUser(userName: string) {
