@@ -1,5 +1,5 @@
 import { TodoItem } from './models/todos.classes';
-import { CreateTodoRequestDTO, GetAllTodosResponseDTO } from './models/todos.dto';
+import { CreateTodoRequestDTO, CreateTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO } from './models/todos.dto';
 import { AuthService } from '../auth/auth.service';
 import { Injectable, HttpException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
@@ -23,16 +23,15 @@ export class TodosService {
         return {todos: todos};
     }
 
-    
-    async getTodoById(todoId: string ,jwtToken: string) {
+    async getTodoById(todoId: string ,jwtToken: string): Promise<GetTodoDTO> {
         const userName = this.authSvc.getUserNameFromToken(jwtToken);
         const todos = this.getUserTodos(userName);
         const todo = todos.find(todo => todo.id === todoId);
 
-        return todo;
+        return {todo: todo};
     }
 
-    async createTodo(jwtToken: string, body: CreateTodoRequestDTO) {
+    async createTodo(jwtToken: string, body: CreateTodoRequestDTO): Promise<CreateTodoResponseDTO> {
         const user = await this.authSvc.getUserNameFromToken(jwtToken);
         const todoId = uuid();
         const newTodo = {
@@ -41,7 +40,7 @@ export class TodosService {
         };
         this.dataSvc.db.find(_user => _user.username === user).todos.push(newTodo);
 
-        return newTodo;
+        return {todo: newTodo.id};
     }
 
     async replaceTodo(jwtToken: string, todoId: string, payload: any) {

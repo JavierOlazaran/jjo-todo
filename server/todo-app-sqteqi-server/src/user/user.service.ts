@@ -1,11 +1,8 @@
+import { User } from './model/user.model';
 import { UserCredentialsRequestDTO } from './../auth/models/auth.dtos';
 import { Injectable, HttpException } from '@nestjs/common';
 import { DataService } from '../data/mock.db.service';
 
-// The data base handling is basic and just made as
-// as example. In real life and with more time,
-// I would implement some abstraction to handle the
-// actual DB connection.
 
 @Injectable()
 export class UserService {
@@ -26,7 +23,7 @@ export class UserService {
         return await this.dataSvc.db.find(user => user.username === newUser.username).username;
     }
 
-    async findUser(userName: string) {
+    async findUser(userName: string): Promise<User> {
         return await this.dataSvc.db.find(user => user.username === userName);
     }
 }

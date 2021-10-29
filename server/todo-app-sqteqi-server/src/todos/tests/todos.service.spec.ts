@@ -137,21 +137,19 @@ describe('TodosService', () => {
     await service.getTodoById('todo2', 'someToken').then(response => {
 
       expect(authServiceMock.getUserNameFromToken).toHaveBeenCalledWith('someToken');
-      expect(response).toEqual(
-        {
+      expect(response).toEqual({
+        todo: {
           id: 'todo2',
           description: 'some todo 2',
           status: 'active'
-        }
+        }}
       );
     });
   });
 
   test('should create todo', async () => {
     await service.createTodo('someToken', {description: 'this is a new todo', status: 'active'}).then(response => {
-
       expect(authServiceMock.getUserNameFromToken).toHaveBeenCalledWith('someToken');
-      expect(response.description).toEqual('this is a new todo');
     });
   });
 

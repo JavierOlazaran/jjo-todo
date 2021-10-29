@@ -1,4 +1,4 @@
-import { CreateTodoRequestDTO, GetAllTodosResponseDTO } from './models/todos.dto';
+import { CreateTodoRequestDTO, CreateTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO } from './models/todos.dto';
 import { TodosService } from './todos.service';
 import { JwtAuthGuard } from './../auth/guards/jwt-auth.guard';
 import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, Put, UseGuards } from '@nestjs/common';
@@ -17,13 +17,13 @@ export class TodosController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':todoId')
-  async getTodoById( @Param('todoId') todoId: string,@Headers('authorization') authorization: string) {
+  async getTodoById( @Param('todoId') todoId: string,@Headers('authorization') authorization: string): Promise<GetTodoDTO> {
     return await this.todosSvc.getTodoById(todoId, authorization);
   }
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createTodo(@Headers('authorization') authorization: string, @Body() body: CreateTodoRequestDTO) {
+  async createTodo(@Headers('authorization') authorization: string, @Body() body: CreateTodoRequestDTO): Promise<CreateTodoResponseDTO> {
     return await this.todosSvc.createTodo(authorization, body);
   }
 

@@ -4,6 +4,10 @@ import { TodoItem } from "./todos.classes";
 export class GetAllTodosResponseDTO {
     todos: TodoItem [];
 }
+
+export class GetTodoDTO {
+    todo: TodoItem;
+}
 export class CreateTodoRequestDTO {
     @IsString()
     @IsNotEmpty()
@@ -14,3 +18,7 @@ export class CreateTodoRequestDTO {
     status: string;
 }
 
+export class CreateTodoResponseDTO {
+    todo: string;
+}
+ 
