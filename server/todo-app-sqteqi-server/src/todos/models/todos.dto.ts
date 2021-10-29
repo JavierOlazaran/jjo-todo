@@ -46,3 +46,7 @@ export class TodoPatchResponseDTO {
 export class DeleteTodoResponseDTO {
     deleted: string;
 }
+
+export class DeleteCompletedTodosResponseDTO {
+    todos: TodoItem[];
+}

@@ -1,5 +1,5 @@
 import { TodoItem } from './models/todos.classes';
-import { CreateTodoRequestDTO, CreateTodoResponseDTO, DeleteTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO, TodoPatchActionDTO, TodoPatchResponseDTO, UpdateTodoRequestDTO, UpdateTodoResponseDTO } from './models/todos.dto';
+import { CreateTodoRequestDTO, CreateTodoResponseDTO, DeleteCompletedTodosResponseDTO, DeleteTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO, TodoPatchActionDTO, TodoPatchResponseDTO, UpdateTodoRequestDTO, UpdateTodoResponseDTO } from './models/todos.dto';
 import { AuthService } from '../auth/auth.service';
 import { Injectable, HttpException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
@@ -74,13 +74,13 @@ export class TodosService {
         return {deleted: todoId};
     }
 
-    async deleteCompleted(jwtToken) {
+    async deleteCompleted(jwtToken): Promise<DeleteCompletedTodosResponseDTO> {
         const user = await this.authSvc.getUserNameFromToken(jwtToken);
         const userTodos: any[] = this.dataSvc.db.find(_user => _user.username === user).todos;
 
         this.dataSvc.db.find(_user => _user.username === user).todos = userTodos.filter(item => item.status === 'active');
-
-        return this.dataSvc.db.find(_user => _user.username === user).todos;
+        const _todos = this.dataSvc.db.find(_user => _user.username === user).todos;
+        return {todos: _todos}
     }
 
     private async updateStatusStrategy(dataSvc: DataService, user: string, todoId: string, value: string) {

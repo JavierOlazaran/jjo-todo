@@ -1,6 +1,7 @@
 import {
 	CreateTodoRequestDTO,
 	CreateTodoResponseDTO,
+	DeleteCompletedTodosResponseDTO,
 	DeleteTodoResponseDTO,
 	GetAllTodosResponseDTO,
 	GetTodoDTO,
@@ -90,7 +91,7 @@ export class TodosController {
 	@Delete("/delete/completed")
 	async deleteCompletedTodos(
 		@Headers("authorization") authorization: string
-	) {
+	): Promise<DeleteCompletedTodosResponseDTO> {
 		return await this.todosSvc.deleteCompleted(authorization);
 	}
 }
