@@ -1,3 +1,4 @@
+import { DataService } from './../mock.db';
 import { CreateTodoRequestDTO } from './models/todos.dto';
 import { TodosService } from './todos.service';
 import { JwtAuthGuard } from './../auth/guards/jwt-auth.guard';
@@ -5,7 +6,9 @@ import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, Put, UseGua
 
 @Controller('todos')
 export class TodosController {
-  constructor(private todosSvc: TodosService) {}
+  constructor(
+    private todosSvc: TodosService
+  ) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()

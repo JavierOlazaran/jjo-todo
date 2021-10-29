@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { db } from '../mock.db';
+import { DataService } from '../mock.db';
 import { RegisterUserRequestDTO } from './model/user.model';
 
 // The data base handling is basic and just made as
@@ -10,16 +10,20 @@ import { RegisterUserRequestDTO } from './model/user.model';
 @Injectable()
 export class UserService {
 
-    saveNewUser(newUser: RegisterUserRequestDTO) {
-        db.push({
+    constructor(
+        private dataSvc: DataService
+    ) {}
+
+    async saveNewUser(newUser: RegisterUserRequestDTO) {
+        this.dataSvc.db.push({
             ...newUser,
             todos: [],
         });
 
-        return db.find(user => user.userName === newUser.userName);
+        return await this.dataSvc.db.find(user => user.userName === newUser.userName);
     }
 
-    findUser(userName: string) {
-        return db.find(user => user.userName === userName);
+    async findUser(userName: string) {
+        return await this.dataSvc.db.find(user => user.userName === userName);
     }
 }
