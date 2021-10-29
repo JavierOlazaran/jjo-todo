@@ -1,12 +1,11 @@
 .login__page__container {
   background-color: var(--main-background-color);
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 
   .login__form__container {
-
     position: absolute;
-    top: 15%;
+    top: 8%;
     left: 50%;
     transform: translateX(-50%);
 
@@ -14,7 +13,9 @@
     flex-direction: column;
     justify-content: center;
 
-    width: 500px;
+    width: 90%;
+    max-width: 500px;
+    min-width: 330px;
 
     .login__form {
       background-color: var(--element-background-color);
@@ -26,7 +27,7 @@
       border-radius: var(--block-border-radius);
       height: max-content;
       margin-top: 50px;
-      padding: 35px 25px ;
+      padding: 35px 25px;
       box-shadow: var(--element-shadow);
 
       position: relative;
@@ -50,7 +51,6 @@
           font-family: var(--main-font-400);
           font-size: 1em;
           color: var(--primary-foreground-color);
-
         }
 
         .invalid__input {
@@ -62,14 +62,14 @@
           margin: 0;
           color: red;
           font-family: var(--main-font-400);
-          font-size: .75em;
+          font-size: 0.75em;
         }
       }
 
       .wrong__credentials__msg {
         color: red;
         font-family: var(--main-font-400);
-        font-size: .75em;
+        font-size: 0.75em;
       }
 
       .action__buttons__container {
@@ -103,7 +103,7 @@
           }
 
           .--active {
-            color: var(--accent-color)
+            color: var(--accent-color);
           }
         }
 
@@ -114,11 +114,8 @@
         .secondary {
           font-size: 0.75em;
           width: min-content;
-
         }
       }
-
     }
   }
 }
-

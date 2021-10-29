@@ -1,27 +1,55 @@
 .todo_list__footer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 50px;
+  align-content: center;
   align-items: center;
-  flex-wrap: nowrap;
+
 
   font-family: var(--main-font-400);
 
-  padding: 8px 12px 8px 26px;
-  background-color: var(--element-background-color);
+  .items__left__container {
+    grid-column: 1/1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-left: 26px;
+    border-radius: var(--block-border-radius);
+    background-color: var(--element-background-color);
 
-  .items__left__text {
-    margin: 0;
-    color: var(--secondary-foreground-color);
-    font-size: .75em;
+    .items__left__text {
+      margin: 0;
+      color: var(--secondary-foreground-color);
+      font-size: .85em;
+    }
   }
 
   .todos__filters__container {
-    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--block-border-radius);
+    background-color: var(--element-background-color);
+    grid-column: 2/2;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    height: 30px;
+  }
+
+  .clear_completed_btn {
+    grid-column: 3/3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: end;
+    white-space: nowrap;
+    height: 100%;
+    width: 100%;
+    padding-right: 26px;
+    box-sizing: border-box;
+    border-radius: var(--block-border-radius);
+    background-color: var(--element-background-color);
   }
 
   .todos__filter__btn {
@@ -35,8 +63,32 @@
       color: var(--primary-foreground-color);
     }
 
-    .--active {
-      color: var(--accent-color)
+    &.active {
+      color: var(--accent-color);
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .todo_list__footer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 50px);
+    row-gap: 20px;
+
+    .items__left__text {
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+
+    .todos__filters__container {
+      grid-column: 1/3;
+      grid-row: 2/3;
+    }
+
+    .clear_completed_btn {
+      grid-column: 2/3;
+      grid-row: 1/2;
+      justify-self: end;
     }
   }
 }

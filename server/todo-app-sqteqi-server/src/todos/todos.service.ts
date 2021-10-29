@@ -2,7 +2,7 @@ import { CreateTodoRequestDTO } from './models/todos.dto';
 import { AuthService } from '../auth/auth.service';
 import { Injectable, HttpException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
-import { DataService } from '../mock.db';
+import { DataService } from '../data/mock.db.service';
 @Injectable()
 export class TodosService {
     private patchActionsMap = new Map([
@@ -17,6 +17,9 @@ export class TodosService {
 
     async getAllTodos(jwtToken: string) {
         const userName = await this.authSvc.getUserNameFromToken(jwtToken);
+        console.log(this.dataSvc.db);
+        console.log('name', userName);
+        
         const todos = this.dataSvc.db.find(item => {return item.userName === userName}).todos;
         return todos;
     }

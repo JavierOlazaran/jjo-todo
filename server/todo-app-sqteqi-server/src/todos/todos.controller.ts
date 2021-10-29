@@ -1,4 +1,3 @@
-import { DataService } from './../mock.db';
 import { CreateTodoRequestDTO } from './models/todos.dto';
 import { TodosService } from './todos.service';
 import { JwtAuthGuard } from './../auth/guards/jwt-auth.guard';

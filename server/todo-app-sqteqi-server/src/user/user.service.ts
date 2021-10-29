@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DataService } from '../mock.db';
+import { DataService } from '../data/mock.db.service';
 import { RegisterUserRequestDTO } from './model/user.model';
 
 // The data base handling is basic and just made as

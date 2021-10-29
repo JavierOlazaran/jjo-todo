@@ -16,7 +16,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   todos: TodoItem[] = [];
   userTodos: TodoItem[] = [];
   activeTodosLeft: number = 0;
-
+  
   draggingIndex!: number;
   private footerActionEventsMap: Map<footerButtonEvent, any>;
 

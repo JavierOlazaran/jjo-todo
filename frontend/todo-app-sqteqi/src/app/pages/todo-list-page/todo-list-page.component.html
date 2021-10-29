@@ -25,7 +25,7 @@
       </ul>
       <app-todos-list-footer
         [totalItems]="activeTodosLeft"
-        (buttonEvent)="onFooterButtonClick($event)"
+        (filterButtonEvent)="onFooterButtonClick($event)"
         (clearCompleted)="clearCompleted()"
       ></app-todos-list-footer>
     </div>

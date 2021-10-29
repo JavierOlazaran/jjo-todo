@@ -1,3 +1,5 @@
+
+
 .todo_list__header {
   display: flex;
   justify-content: space-between;
@@ -7,7 +9,7 @@
     font-family: var(--main-font-700);
     color: var(--tertiary-foreground-color);
     margin: 0;
-    font-size: 2em;
+    font-size: clamp(1.5em, 3vw, 2em);
     height: 1.5em;
     line-height: 1.75em;
   }

@@ -12,6 +12,8 @@ export class AuthService {
     ) {}
     
     async login(user: string) {
+        console.log(user);
+        
         return {access_token: this.jwt.sign({user: user})};
     }
 
@@ -32,6 +34,8 @@ export class AuthService {
     async getUserNameFromToken(jwtToken: string) {
         const token = jwtToken.replace('Bearer ', '');
         const payload = await this.retrieveJwtPayload(token);
+        console.log('payload', payload);
+        
         const userName = payload["user"];
 
         return userName;

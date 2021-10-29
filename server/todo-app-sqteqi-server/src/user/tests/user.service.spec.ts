@@ -1,4 +1,4 @@
-import { DataService } from './../../mock.db';
+import { DataService } from '../../data/mock.db.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from '../user.service';
 
