@@ -1,5 +1,5 @@
 import { TodoItem } from './models/todos.classes';
-import { CreateTodoRequestDTO, CreateTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO } from './models/todos.dto';
+import { CreateTodoRequestDTO, CreateTodoResponseDTO, GetAllTodosResponseDTO, GetTodoDTO, TodoPatchActionDTO, TodoPatchResponseDTO, UpdateTodoRequestDTO, UpdateTodoResponseDTO } from './models/todos.dto';
 import { AuthService } from '../auth/auth.service';
 import { Injectable, HttpException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
@@ -43,7 +43,7 @@ export class TodosService {
         return {todo: newTodo.id};
     }
 
-    async replaceTodo(jwtToken: string, todoId: string, payload: any) {
+    async replaceTodo(jwtToken: string, todoId: string, payload: UpdateTodoRequestDTO): Promise<UpdateTodoResponseDTO> {
         const user = await this.authSvc.getUserNameFromToken(jwtToken);
         const itemIndex = this.dataSvc.db.find(_user => _user.username === user).todos.findIndex(item => item.id === todoId);
 
@@ -53,14 +53,17 @@ export class TodosService {
             1,
             {id: todoId, ...payload}
         );
-
-        return this.dataSvc.db.find(_user => _user.username === user).todos.find(item => item.id === todoId);
+        const todo = this.dataSvc.db.find(_user => _user.username === user).todos.find(item => item.id === todoId);
+        return { todo: todo };
     }
 
-    async runPatchAction(jwtToken: string, todoId: string, action: any) {
+    async runPatchAction(jwtToken: string, todoId: string, action: any): Promise<TodoPatchResponseDTO> {
         const user = await this.authSvc.getUserNameFromToken(jwtToken);
+
         if (!this.patchActionsMap.has(action.op)) throw new HttpException('Invalid action', 400);
-        return await this.patchActionsMap.get(action.op)(this.dataSvc, user, todoId, action.value);
+
+        const patchedTodo = await this.patchActionsMap.get(action.op)(this.dataSvc, user, todoId, action.value);
+        return { todo: patchedTodo };
     }
 
     async deleteTodo(jwtToken: string, todoId) {

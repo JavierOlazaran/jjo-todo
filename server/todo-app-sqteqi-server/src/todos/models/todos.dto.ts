@@ -22,3 +22,23 @@ export class CreateTodoResponseDTO {
     todo: string;
 }
  
+export class UpdateTodoRequestDTO {
+    description: string;
+    status: string;
+}
+export class UpdateTodoResponseDTO {
+    todo: TodoItem;
+}
+export class TodoPatchActionDTO {
+    @IsNotEmpty()
+    @IsString()
+    op: string;
+
+    @IsNotEmpty()
+    @IsString()
+    value: string;
+}
+
+export class TodoPatchResponseDTO {
+    todo: TodoItem;
+}

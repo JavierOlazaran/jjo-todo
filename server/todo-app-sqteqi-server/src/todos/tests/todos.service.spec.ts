@@ -157,11 +157,12 @@ describe('TodosService', () => {
     await service.replaceTodo('someToken', 'todo2', {description: 'updated description', status: 'active'}).then(response => {
 
       expect(authServiceMock.getUserNameFromToken).toHaveBeenCalledWith('someToken');
-      expect(response).toEqual({
+      expect(response).toEqual(
+      {todo: {
         id: 'todo2',
         description: 'updated description',
         status: 'active'
-      });
+      }});
     });
   });
 
@@ -170,19 +171,21 @@ describe('TodosService', () => {
 
     await service.runPatchAction('someToken', 'todo4', {op: 'update_status', value: 'completed'}).then(response => {
       expect(response).toEqual({
+        todo: {
         id: 'todo4',
         description: 'some todo 4',
         status: 'completed'
-      });
+      }});
     });
 
     await service.runPatchAction('someToken', 'todo3', {op: 'update_description', value: 'updated description'}).then(response => {
       expect(authServiceMock.getUserNameFromToken).toHaveBeenCalledWith('someToken');
       expect(response).toEqual({
+        todo: {
         id: 'todo3',
         description: 'updated description',
         status: 'completed'
-      });
+      }});
     });
   });
   
