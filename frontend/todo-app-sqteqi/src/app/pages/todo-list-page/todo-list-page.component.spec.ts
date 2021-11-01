@@ -1,3 +1,4 @@
+import { TodosResponseDTO } from './../../core/models/todos.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DeleteButtonComponent } from './components/delete-button/delete-button.component';
@@ -18,7 +19,7 @@ describe('TodoListComponent', () => {
   let fixture: ComponentFixture<TodoListComponent>;
   const todosServiceMock = {
     getTodos: jest.fn(() => {
-      return new Observable(observer => observer.next(todosListMock))
+      return new Observable(observer => observer.next(todosResponseMock))
     }),
     deleteTodo: jest.fn(() => {
       return new Observable(observer => observer.next())
@@ -36,6 +37,7 @@ describe('TodoListComponent', () => {
   const errorServiceMock = {
     gotoErrorPage: jest.fn(),
   };
+
   const todosListMock: TodoItem[] = [
     {
       id: 'todo1',
@@ -68,6 +70,8 @@ describe('TodoListComponent', () => {
       status: 'active'
     },
   ];
+
+  const todosResponseMock: TodosResponseDTO = {todos: todosListMock};
 
   const activeTodosMock: TodoItem[] = [
     {
@@ -140,10 +144,9 @@ describe('TodoListComponent', () => {
   describe('onInit', () => {
 
     test('should get user\'s todos', () => {
-      const getTodosSpy = jest.spyOn(todosServiceMock, 'getTodos');
       fixture.detectChanges();
 
-      expect(getTodosSpy).toHaveBeenCalled();
+      expect(todosServiceMock.getTodos).toHaveBeenCalled();
       expect(component.userTodos).toEqual(todosListMock);
       expect(component.todos).toEqual(todosListMock);
       expect(component.activeTodosLeft).toEqual(4);
@@ -180,7 +183,7 @@ describe('TodoListComponent', () => {
       const deleteCompletedSpy = jest.spyOn(todosServiceMock, 'deleteCompletedTodos');
       const getUserTodosSpy = jest.spyOn(component, 'getUserTodos');
       todosServiceMock.getTodos.mockReturnValue(new Observable(observer => {
-        observer.next(activeTodosMock);
+        observer.next({todos: activeTodosMock});
       }));
 
       component.clearCompleted();
@@ -201,7 +204,7 @@ describe('TodoListComponent', () => {
       const deleteTodoSpy = jest.spyOn(todosServiceMock, 'deleteTodo');
       const getUserTodosSpy = jest.spyOn(component, 'getUserTodos');
       todosServiceMock.getTodos.mockReturnValue(new Observable(observer => {
-        observer.next(todosListMock.filter(item => item.id !== 'todo1'));
+        observer.next({todos: todosListMock.filter(item => item.id !== 'todo1')});
       }));
 
       component.deleteTodo('todo1');
@@ -226,10 +229,10 @@ describe('TodoListComponent', () => {
       const getUserTodosSpy = jest.spyOn(component, 'getUserTodos');
       const updateTodoStatusSpy = jest.spyOn(todosServiceMock, 'updateTodoStatus');
       todosServiceMock.getTodos.mockReturnValue(new Observable(observer => {
-        observer.next(todosListMock.map(item => {
+        observer.next({todos: todosListMock.map(item => {
           if (item.id === 'todo1') { return item = {...item, status: 'active'}}
           return item;
-        }));
+        })});
       }));
 
       component.updateItemStatus(todosListMock[0]);
@@ -251,7 +254,7 @@ describe('TodoListComponent', () => {
       const getUserTodosSpy = jest.spyOn(component, 'getUserTodos');
       const createTodoSpy = jest.spyOn(todosServiceMock, 'createTodo');
       todosServiceMock.getTodos.mockReturnValue(new Observable(observer => {
-        observer.next(todosListMock.concat(newTodoMock));
+        observer.next({todos: todosListMock.concat(newTodoMock)});
       }));
 
       component.createTodo(newTodoMock);

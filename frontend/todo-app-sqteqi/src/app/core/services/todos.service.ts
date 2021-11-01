@@ -1,4 +1,4 @@
-import { DeletedTodo } from '../models/todos.model';
+import { DeletedTodo, TodosResponseDTO } from '../models/todos.model';
 import { TodoItem } from './../../pages/todo-list-page/components/todo-item/todo-item.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -16,8 +16,8 @@ export class TodosService {
     private http: HttpClient
   ) { }
 
-  getTodos(): Observable<TodoItem[]> {
-    return this.http.get<TodoItem[]>(this.todosUrl);
+  getTodos(): Observable<TodosResponseDTO> {
+    return this.http.get<TodosResponseDTO>(this.todosUrl);
   }
 
   deleteTodo(itemId: string): Observable<DeletedTodo> {

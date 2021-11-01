@@ -10,7 +10,7 @@
       </div>
       <ul class="todos__list" *ngIf="todos.length > 0" >
         <div class="draggable_item_wrapper" *ngFor="let todo of todos; let index = index"
-          [class.dragging]="index === this.draggingIndex"
+          [class.dragging]="index === draggingIndex"
           [draggable]="true"
           (dragstart)="onDragStart(index)"
           (dragenter)="onDragEnter(index)"

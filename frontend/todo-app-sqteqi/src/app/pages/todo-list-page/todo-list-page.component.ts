@@ -16,7 +16,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   todos: TodoItem[] = [];
   userTodos: TodoItem[] = [];
   activeTodosLeft: number = 0;
-  
+
   draggingIndex!: number;
   private footerActionEventsMap: Map<footerButtonEvent, any>;
 
@@ -51,7 +51,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   getUserTodos() {
     const getTodosSUb = this.todosSvc.getTodos().subscribe(
       res => {
-        this.userTodos = res;
+        this.userTodos = res.todos;
         this.todos = this.userTodos;
         this.setActiveItemsCount();
       },

@@ -1,8 +1,27 @@
 describe('login and get TODOs', () => {
-  cy.intercept('GET', 'auth/login', 'fixture:todosList');
 
+  it('should behave...', () => {
 
-  cy.visit('/');
+    cy.intercept('POST', 'auth/login').as('login');
+    cy.intercept('GET', 'todos').as('getAllTodos');
 
-  cy.get('#username')
+    cy.visit('/');
+    cy.get('#username').type('user1');
+    cy.get('#password').type('12345');
+    cy.get('.primary.button').click();
+
+    cy.wait('@login').then((interception) => {
+      console.log(interception);
+      assert.isNotNull(interception.response?.body);
+    });
+
+    cy.visit('/');
+    cy.url().should('include', '/todo-list');
+    cy.wait('@getAllTodos').then( interception => {
+      console.log(interception);
+      assert.isNotNull(interception.response?.body);
+      assert.isTrue(interception.response?.body.todos.length === 6);
+    });
+
+  });
 })

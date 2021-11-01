@@ -21,7 +21,6 @@ import {
 	Param,
 	Patch,
 	Post,
-	Provider,
 	Put,
 	UseGuards,
 } from "@nestjs/common";
