@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   envConstants: {
-    apiBaseUrl: 'http://localhost:3200',
+    apiBaseUrl: 'http://localhost:3200/v1',
     todosEndpoint: '/todos',
     authEndpoint: '/auth',
   }

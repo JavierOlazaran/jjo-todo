@@ -25,7 +25,7 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 
-@Controller("todos")
+@Controller("v1/todos")
 export class TodosController {
 	constructor(private todosSvc: TodosService) {}
 
