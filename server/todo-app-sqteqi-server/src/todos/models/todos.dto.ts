@@ -9,12 +9,7 @@ export class GetTodoDTO {
     todo: TodoItem;
 }
 export class CreateTodoRequestDTO {
-    @IsString()
-    @IsNotEmpty()
     description: string;
-
-    @IsString()
-    @IsNotEmpty()
     status: string;
 }
 

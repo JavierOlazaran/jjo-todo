@@ -1,5 +1,5 @@
 import { User } from './model/user.model';
-import { UserCredentialsRequestDTO } from './../auth/models/auth.dtos';
+import { UserCredentialsRequestDTO } from '../auth/models/auth.dto';
 import { Injectable, HttpException } from '@nestjs/common';
 import { DataService } from '../data/mock.db.service';
 

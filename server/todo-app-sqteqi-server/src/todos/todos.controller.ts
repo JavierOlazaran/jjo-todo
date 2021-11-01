@@ -24,7 +24,9 @@ import {
 	Put,
 	UseGuards,
 } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Todos')
 @Controller("v1/todos")
 export class TodosController {
 	constructor(private todosSvc: TodosService) {}

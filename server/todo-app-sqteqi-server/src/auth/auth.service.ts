@@ -1,7 +1,7 @@
 import { UserService } from './../user/user.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { LoginResponseDTO, SaveNewUserResponseDTO, UserCredentialsRequestDTO } from './models/auth.dtos';
+import { LoginResponseDTO, SaveNewUserResponseDTO, UserCredentialsRequestDTO } from './models/auth.dto';
 import { JWTTokenPayload } from './models/auth.classes';
 
 @Injectable()
