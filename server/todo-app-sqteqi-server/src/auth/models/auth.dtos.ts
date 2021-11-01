@@ -10,7 +10,7 @@ export class UserCredentialsRequestDTO {
     password: string;
 }
 
-export class LoginUserResponseDTO {
+export class LoginResponseDTO {
     access_token: string;
 }
 

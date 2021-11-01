@@ -9,6 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 })
 export class NewTodoComponent implements OnInit {
 
+  // TODO: Other validations such as max length are something to consider
   newTodoForm = new FormGroup({
     description: new FormControl('', [Validators.required])
   })

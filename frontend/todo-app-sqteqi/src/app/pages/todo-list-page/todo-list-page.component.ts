@@ -48,6 +48,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.deleteCompletedTodos();
   }
 
+  // TODO: It should be considered the need to implement some sort of pagination or infinite virtual scrolling
   getUserTodos() {
     const getTodosSUb = this.todosSvc.getTodos().subscribe(
       res => {
@@ -88,6 +89,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
     );
   }
 
+  // TODO: If some kind of pagination is implemented, this functionality should involve
+  // BE calls with filters as query parameters.
   private filterActive(todos: TodoItem[]) {
     return todos.filter(item => item.status === 'active');
   }
@@ -118,6 +121,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.draggingIndex = NaN;
   }
 
+  // TODO: This functionality should probably implement a BE functionality to update the order in the DB
+  // I would probably create an order field.
   private reorderItem(fromIndex: number, toIndex: number): void {
     const itemToBeReordered = this.todos.splice(fromIndex, 1)[0];
     this.todos.splice(toIndex, 0, itemToBeReordered);

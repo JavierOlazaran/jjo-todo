@@ -95,6 +95,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm.updateValueAndValidity();
   }
 
+  // TODO: Other validations should be implemented in a productive app such as password
+  // security policies amd maximum characters validation
   submit() {
     if (this.loginForm.valid) {
       const credentials = {

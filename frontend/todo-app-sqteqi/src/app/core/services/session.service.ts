@@ -24,6 +24,11 @@ export class SessionService {
 
   constructor() {}
 
+  /**
+   * @description Saves the token in the local storage and sets the session object
+   *
+   * @param token The bearer token string
+   */
   setSession(token: string) {
     localStorage.setItem('token', token);
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
@@ -38,12 +43,21 @@ export class SessionService {
     localStorage.removeItem('token');
   }
 
+  /**
+   * @description the session object
+   */
   get session() { return this._session };
 
+  /**
+   * @description the token string
+   */
   get token(): string | null {
     return localStorage.getItem('token');
   }
 
+  /**
+   * @description the expiration time in unix format
+   */
   get exp(): number {
     return this._session.exp;
   }
@@ -52,11 +66,16 @@ export class SessionService {
     return this._session.user;
   }
 
+  /**
+   *
+   * @returns true if the session is valid
+   */
   isLogged(): boolean {
     const token = localStorage.getItem('token');
 
     if (!token) return false;
 
+    // if the session object is not defined it will reset it from the stored token
     if (isNaN(this._session.exp)) {
       this.setSession(token)
     }
