@@ -5,3 +5,9 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+@media (max-width: 375px) {
+  .background__image {
+    background-image: var(--mobile-bg-img-path);
+  }
+}
