@@ -7,25 +7,21 @@ Frontend:
 
 - Improve scss fragments reusability
 - Finish e2e testing
-- Finish mobile designs
 - Implement pagination
 - Implemet password reset
+- Implement session timeout and refresh
 - Create error page
 - Create 404 page
 - Create strategy based error handling
-- Improve responsiveness
-- Login form is a mess
-
+- Contemplate scrolling on todos list
 
 ################################################################################
 
 Backend:
 
-- Finish UT
 - Finish e2e testing
-- Complete DTOs
-- Add DB management service
 - Implement pagination
 - Implemet password reset
+- Implement session timeout and refresh
 
 ################################################################################
