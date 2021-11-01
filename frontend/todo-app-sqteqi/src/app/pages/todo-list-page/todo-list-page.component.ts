@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { ErrorHandlingService } from './../../core/services/error-handling.service';
+import { ErrorHandlingService } from '../../core/services/error/error-handling.service';
 import { footerButtonEvent } from './components/todos-list-footer/todos-list-footer.component';
 import { TodosService } from './../../core/services/todos.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -56,7 +56,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
         this.todos = this.userTodos;
         this.setActiveItemsCount();
       },
-      err => {this.errorSvc.gotoErrorPage()}
+      err => {this.errorSvc.handleError()}
     );
     this.subscriptions.push(getTodosSUb);
   }
@@ -64,28 +64,28 @@ export class TodoListComponent implements OnInit, OnDestroy {
   deleteTodo(itemId: string) {
     this.todosSvc.deleteTodo(itemId).subscribe(
       res => this.getUserTodos(),
-      err => this.errorSvc.gotoErrorPage()
+      err => this.errorSvc.handleError()
     );
   }
 
   updateItemStatus(item: TodoItem) {
     this.todosSvc.updateTodoStatus(item).subscribe(
       res => this.getUserTodos(),
-      err => this.errorSvc.gotoErrorPage(),
+      err => this.errorSvc.handleError(),
     );
   }
 
   createTodo(newTodo: any) {
     this.todosSvc.createTodo(newTodo).subscribe(
       res => this.getUserTodos(),
-      err => this.errorSvc.gotoErrorPage()
+      err => this.errorSvc.handleError()
     );
   }
 
   private deleteCompletedTodos() {
     this.todosSvc.deleteCompletedTodos().subscribe(
       res => this.getUserTodos(),
-      err => this.errorSvc.gotoErrorPage()
+      err => this.errorSvc.handleError()
     );
   }
 

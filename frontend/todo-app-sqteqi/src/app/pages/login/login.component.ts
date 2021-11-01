@@ -1,6 +1,6 @@
 import { appRoutes } from './../../routes';
 import { Router } from '@angular/router';
-import { ErrorHandlingService } from './../../core/services/error-handling.service';
+import { ErrorHandlingService } from '../../core/services/error/error-handling.service';
 import { SessionService } from './../../core/services/session.service';
 import { AuthService } from './../../core/services/auth.service';
 import { customValidators } from './../../shared/utils/custom-form.validators';
@@ -124,7 +124,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private handleRegisterError(error: any) {
-    this.errorSvc.gotoErrorPage();
+    this.errorSvc.handleError('AUTH');
   }
 
   private handleSuccessfulLogin(response: any) {
@@ -137,7 +137,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if(error.status === 401) {
       this.inputError = {display: true, msg: 'Wrong user or password'};
     } else {
-      this.errorSvc.gotoErrorPage();
+      this.errorSvc.handleError('DEFAULT');
     }
   }
 }

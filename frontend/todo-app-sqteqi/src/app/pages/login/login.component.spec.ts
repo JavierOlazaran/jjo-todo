@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ErrorHandlingService } from './../../core/services/error-handling.service';
+import { ErrorHandlingService } from '../../core/services/error/error-handling.service';
 import { AuthService } from './../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { SessionService } from './../../core/services/session.service';

@@ -8,7 +8,7 @@ import { TodoItem, TodoItemComponent } from './components/todo-item/todo-item.co
 import { TodosListFooterComponent } from './components/todos-list-footer/todos-list-footer.component';
 import { NewTodoComponent } from './components/new-todo/new-todo.component';
 import { SharedModule } from './../../shared/shared.module';
-import { ErrorHandlingService } from './../../core/services/error-handling.service';
+import { ErrorHandlingService } from '../../core/services/error/error-handling.service';
 import { TodosService } from './../../core/services/todos.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -35,7 +35,7 @@ describe('TodoListComponent', () => {
     }),
   };
   const errorServiceMock = {
-    gotoErrorPage: jest.fn(),
+    handleError: jest.fn(),
   };
 
   const todosListMock: TodoItem[] = [
@@ -276,7 +276,7 @@ describe('TodoListComponent', () => {
 
       component.createTodo(newTodoMock);
 
-      expect(errorServiceMock.gotoErrorPage).toHaveBeenCalled();
+      expect(errorServiceMock.handleError).toHaveBeenCalled();
     });
 
 
@@ -288,7 +288,7 @@ describe('TodoListComponent', () => {
 
       component.createTodo(newTodoMock);
 
-      expect(errorServiceMock.gotoErrorPage).toHaveBeenCalled();
+      expect(errorServiceMock.handleError).toHaveBeenCalled();
     });
 
     test('should call error service on deleteTodo error responses', () => {
@@ -298,7 +298,7 @@ describe('TodoListComponent', () => {
 
       component.deleteTodo('todo1');
 
-      expect(errorServiceMock.gotoErrorPage).toHaveBeenCalled();
+      expect(errorServiceMock.handleError).toHaveBeenCalled();
     });
 
     test('should call error service on updateItemStatus error responses', () => {
@@ -308,7 +308,7 @@ describe('TodoListComponent', () => {
 
       component.updateItemStatus(todosListMock[0]);
 
-      expect(errorServiceMock.gotoErrorPage).toHaveBeenCalled();
+      expect(errorServiceMock.handleError).toHaveBeenCalled();
     });
 
     test('should call error service on deleteCompletedTodos error responses', () => {
@@ -318,7 +318,7 @@ describe('TodoListComponent', () => {
 
       component.clearCompleted();
 
-      expect(errorServiceMock.gotoErrorPage).toHaveBeenCalled();
+      expect(errorServiceMock.handleError).toHaveBeenCalled();
     });
 
     test('should call error service on getTodos error responses', () => {
@@ -328,7 +328,7 @@ describe('TodoListComponent', () => {
 
       component.getUserTodos();
 
-      expect(errorServiceMock.gotoErrorPage).toHaveBeenCalled();
+      expect(errorServiceMock.handleError).toHaveBeenCalled();
     });
   });
 
